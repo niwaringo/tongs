@@ -1,17 +1,29 @@
+'use strict';
+
+var extend = require('util')._extend;
+
 /**
  * @param {string || date} date
  */
 function expireString(date) {
-  switch(toString.call(date)) {
+  switch(Object.prototype.toString.call(date)) {
     case "[object String]":
-      return _date;
+      return date;
 
     case "[object Date]":
-      return _date.toUTCString();
+      return date.toUTCString();
 
     default:
       return "";
   }
+}
+
+/**
+ * @param {string} key
+ * @param {string} value
+ */
+function concatKeyVal(key, value) {
+  return key + '=' + value;
 }
 
 /**
@@ -24,8 +36,7 @@ var CookerModel = function(name, value) {
   this.name = encodeURIComponent(name);
   this.value = encodeURIComponent(value);
   this.attrs = [];
-
-  this._pushAttrs(this.name, this.value);
+  this.attrs.push(concatKeyVal(this.name, this.value));
 };
 
 /**
@@ -39,16 +50,7 @@ CookerModel.prototype.save = function() {
   document.cookie = this.toString();
 };
 
-/**
- * @param {string} key
- * @param {string} value
- */
-CookerModel.prototype._pushAttrs = function(key, value) {
-  this.attrs.push(key + '=' + value);
-};
-
 CookerModel.prototype._constructOptions = function(obj) {
 };
 
 module.exports = CookerModel;
-
