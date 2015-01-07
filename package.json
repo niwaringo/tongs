@@ -4,7 +4,7 @@
   "description": "cookie util",
   "main": "cooker.js",
   "scripts": {
-    "test": "./node_modules/karma/bin/karma start ./config/karma.conf.default.js",
+    "test": "./node_modules/karma/bin/karma start",
     "build": "./node_modules/browserify/bin/cmd.js ./src/cooker.js -o cooker.js"
   },
   "browser": {
