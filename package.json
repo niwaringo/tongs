@@ -1,0 +1,26 @@
+{
+  "name": "cooker",
+  "version": "0.0.1",
+  "description": "cookie util",
+  "main": "cooker.js",
+  "scripts": {
+    "test": "./node_modules/karma/bin/karma start",
+    "build": "./node_modules/browserify/bin/cmd.js ./src/cooker.js -o cooker.js"
+  },
+  "browser": {
+    "cooker.core": "./src/cooker.core.js"
+  },
+  "keywords": [
+    "cookie"
+  ],
+  "author": "niwaringo@gmail.com",
+  "license": "MIT",
+  "devDependencies": {
+    "browserify": "^8.0.3",
+    "karma": "^0.12.31",
+    "karma-browserify": "^2.0.0",
+    "karma-chrome-launcher": "^0.1.7",
+    "karma-mocha": "^0.1.10",
+    "mocha": "^2.1.0"
+  }
+}
