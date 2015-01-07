@@ -8,7 +8,8 @@
     "build": "./node_modules/browserify/bin/cmd.js ./src/cooker.js -o cooker.js"
   },
   "browser": {
-    "cooker.core": "./src/cooker.core.js"
+    "cooker.core": "./src/cooker.core.js",
+    "cooker.collection": "./src/cooker.collection.js"
   },
   "keywords": [
     "cookie"
