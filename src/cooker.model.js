@@ -1,4 +1,20 @@
 /**
+ * @param {string || date} date
+ */
+function expireString(date) {
+  switch(toString.call(date)) {
+    case "[object String]":
+      return _date;
+
+    case "[object Date]":
+      return _date.toUTCString();
+
+    default:
+      return "";
+  }
+}
+
+/**
  *  @constructor
  *
  *  @param {string} name
@@ -31,4 +47,8 @@ CookerModel.prototype._pushAttrs = function(key, value) {
   this.attrs.push(key + '=' + value);
 };
 
+CookerModel.prototype._constructOptions = function(obj) {
+};
+
 module.exports = CookerModel;
+
