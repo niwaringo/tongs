@@ -9,4 +9,10 @@ var CookerModel = function(name, value) {
   this.value = encodeURIComponent(value);
 };
 
+CookerModel.prototype.toString = function() {
+  return ([
+    this.name + '=' + this.value
+  ].join(''));
+};
+
 module.exports = CookerModel;
