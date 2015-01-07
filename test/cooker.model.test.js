@@ -14,5 +14,12 @@ describe('model', function() {
 
     assert.strictEqual(co.toString(), 'name=val');
   });
+
+  it('save', function() {
+    var co = new CookerModel('name', 'val');
+    co.save();
+
+    assert.strictEqual(document.cookie, 'name=val1');
+  });
 });
 

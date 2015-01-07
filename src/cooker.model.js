@@ -15,4 +15,8 @@ CookerModel.prototype.toString = function() {
   ].join(''));
 };
 
+CookerModel.prototype.save = function() {
+  document.cookie = this.toString();
+};
+
 module.exports = CookerModel;
