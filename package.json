@@ -9,6 +9,7 @@
   },
   "browser": {
     "cooker.core": "./src/cooker.core.js",
+    "cooker.model": "./src/cooker.model.js",
     "cooker.collection": "./src/cooker.collection.js"
   },
   "keywords": [
