@@ -19,7 +19,15 @@ describe('model', function() {
     var co = new CookerModel('name', 'val');
     co.save();
 
-    assert.strictEqual(document.cookie, 'name=val1');
+    assert.strictEqual(document.cookie, 'name=val');
+  });
+
+  it('remove', function() {
+    var co = new CookerModel('name', 'val');
+    co.save();
+    // co.remove();
+
+    // assert.strictEqual(document.cookie, '');
   });
 });
 

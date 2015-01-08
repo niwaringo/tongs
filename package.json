@@ -2,13 +2,13 @@
   "name": "cooker",
   "version": "0.0.1",
   "description": "cookie util",
-  "main": "cooker.js",
+  "main": "./src/cooker.js",
   "scripts": {
     "test": "./node_modules/karma/bin/karma start",
-    "build": "./node_modules/browserify/bin/cmd.js ./src/cooker.js -o cooker.js"
+    "build": "./node_modules/browserify/bin/cmd.js ./src/cooker.js -o ./dist/cooker.js"
   },
   "browser": {
-    "cooker.core": "./src/cooker.core.js",
+    "cooker": "./src/cooker.js",
     "cooker.model": "./src/cooker.model.js",
     "cooker.collection": "./src/cooker.collection.js"
   },

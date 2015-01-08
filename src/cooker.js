@@ -1,3 +1,3 @@
 'use strict';
 
-var core = require('cooker.core');
+global.CookerModel = require('cooker.model');
