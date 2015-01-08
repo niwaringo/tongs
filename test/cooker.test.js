@@ -54,7 +54,7 @@ describe('Cooker', function() {
     assert.strictEqual(jsons[0].name, 'name');
   });
 
-  if('each', function() {
+  it('each', function() {
     var ar = [];
     this.cooker.create('name1', 'value1');
     this.cooker.create('name2', 'value2');
@@ -62,6 +62,6 @@ describe('Cooker', function() {
       ar.push(model.name);
     });
 
-    assert.strictEqual(ar, ['name1', 'name2']);
+    assert.strictEqual(ar.toString(), ['name1', 'name2'].toString());
   });
 });

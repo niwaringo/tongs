@@ -4,27 +4,7 @@ var Model = require('cooker.model');
 var Collection = require('cooker.collection');
 
 var Cooker = function() {
-  this._collection = [];
-};
-
-/**
- * @param {string} name
- * @return {string}
- */
-Cooker.prototype.get = function(name) {
-  this.updateCollection();
-  if (!this._collection.get(name)) return;
-  return this._collection.get(name).value;
-};
-
-/**
- *  @param {string} name
- *  @param {string} value
- *  @return {void}
- */
-Cooker.prototype.set = function(name, value) {
-  new Model(name, value).save();
-  this.updateCollection();
+  this._collection = new Collection();
 };
 
 /**
@@ -38,6 +18,25 @@ Cooker.prototype.cookie = function(name, value) {
   }
 
   return this.get(name);
+};
+
+/**
+ * @param {string} name
+ * @return {string}
+ */
+Cooker.prototype.get = function(name) {
+  if (this._collection._models.length === 0 || !this._collection.get(name)) return;
+  return this._collection.get(name).value;
+};
+
+/**
+ *  @param {string} name
+ *  @param {string} value
+ *  @return {void}
+ */
+Cooker.prototype.set = function(name, value) {
+  new Model(name, value).save();
+  this.updateCollection();
 };
 
 /**
@@ -64,16 +63,15 @@ Cooker.prototype.update = function(name, value) {
  * @return {array<object>}
  */
 Cooker.prototype.toJSON = function() {
-  this.updateCollection;
   return this._collection.toJSON();
 };
 
 /**
  * @param {function} callback
  */
-// Cooker.prototype.each(function(callback) {
-//
-// };
+Cooker.prototype.each = function(callback, thisArg) {
+  this._collection.each(callback, thisArg);
+};
 
 /**
  * @param {string} name
