@@ -25,6 +25,7 @@ Cooker.prototype.cookie = function(name, value, option) {
  * @return {string}
  */
 Cooker.prototype.get = function(name) {
+  this.updateCollection();
   if (this._collection._models.length === 0 || !this._collection.get(name)) return;
   return decodeURIComponent(this._collection.get(name).value);
 };
@@ -36,7 +37,6 @@ Cooker.prototype.get = function(name) {
  */
 Cooker.prototype.set = function(name, value, option) {
   new Model(name, value, option).save();
-  this.updateCollection();
 };
 
 /**
@@ -63,6 +63,7 @@ Cooker.prototype.update = function(name, value) {
  * @return {array<object>}
  */
 Cooker.prototype.toJSON = function() {
+  this.updateCollection();
   return this._collection.toJSON();
 };
 
@@ -70,20 +71,29 @@ Cooker.prototype.toJSON = function() {
  * @param {function} callback
  */
 Cooker.prototype.each = function(callback, thisArg) {
+  this.updateCollection();
   this._collection.each(callback, thisArg);
 };
 
 /**
  * @param {string} name
+ * @return {boolean}
  */
 Cooker.prototype.remove = function(name) {
-  this._collection.get(name).remove();
-  this.updateCollection;
+  if (!this.get(name)) return false;
+
+  this.each(function(model) {
+    if (model.name === name) {
+      model.remove();
+    }
+  });
+
+  return !this.get(name);
 };
 
 Cooker.prototype.removeAll = function() {
-  this._collection.removeAll();
   this.updateCollection();
+  this._collection.removeAll();
 };
 
 Cooker.prototype.updateCollection = function() {

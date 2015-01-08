@@ -1,7 +1,11 @@
 var CookerModel = require('cooker.model');
+var Cooker = require('cooker');
 var assert = require('assert');
 
 describe('model', function() {
+  afterEach(function() {
+    new Cooker().removeAll();
+  });
   it('name and value is encoded', function() {
     var co = new CookerModel('ネーム', 'ヴァリュー');
 

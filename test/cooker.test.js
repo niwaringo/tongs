@@ -20,10 +20,15 @@ describe('Cooker', function() {
     assert.strictEqual(this.cooker.cookie('name'), 'value');
   });
 
-  it('remove', function() {
+  it('remove suceess', function() {
     this.cooker.cookie('name', 'value');
-    this.cooker.remove('name');
+    var result = this.cooker.remove('name');
     assert.strictEqual(document.cookie, '');
+    assert(result);
+  });
+
+  it('remove error', function() {
+    assert(!this.cooker.remove('nothing'));
   });
 
   it('create sccess', function() {
