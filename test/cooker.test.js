@@ -1,7 +1,7 @@
 var Cooker = require('cooker');
 var assert = require('assert');
 
-describe('Cooker', function() {
+describe('Cooker Base', function() {
   before(function() {
     this.cooker = new Cooker();
   });
@@ -18,5 +18,11 @@ describe('Cooker', function() {
   it('get cookie', function() {
     this.cooker.cookie('name', 'value');
     assert.strictEqual(this.cooker.cookie('name'), 'value');
+  });
+
+  it('remove', function() {
+    this.cooker.cookie('name', 'value');
+    this.cooker.remove('name');
+    assert.strictEqual(document.cookie, '');
   });
 });

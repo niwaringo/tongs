@@ -5,7 +5,6 @@ var Collection = require('cooker.collection');
 
 var Cooker = function() {
   this._collection = [];
-
   this.update();
 };
 
@@ -44,6 +43,13 @@ Cooker.prototype.update = function() {
   if (document) {
     this._collection = new Collection(document.cookie);
   }
+};
+
+/**
+ * @param {string} name
+ */
+Cooker.prototype.remove = function(name) {
+  this._collection.get(name).remove();
 };
 
 Cooker.prototype.removeAll = function() {
