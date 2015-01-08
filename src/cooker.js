@@ -95,5 +95,5 @@ Cooker.prototype.updateCollection = function() {
 module.exports = Cooker;
 
 global.cooker = function() {
-  new Cooker();
+  return new Cooker();
 };
