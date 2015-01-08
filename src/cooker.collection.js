@@ -25,6 +25,8 @@ CookerCollection.prototype.toModels = function(cookie) {
       return modelify(cookie);
     });
   }
+
+  return [];
 };
 
 CookerCollection.prototype.get = function(name) {
