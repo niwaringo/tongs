@@ -79,18 +79,19 @@ Cooker.prototype.each = function(callback, thisArg) {
  * @param {string} name
  * @return {boolean}
  */
-Cooker.prototype.remove = function(name) {
+Cooker.prototype.remove = function(name, option) {
   if (!this.get(name)) return false;
 
   this.each(function(model) {
     if (model.name === name) {
-      model.remove();
+      model.remove(option);
     }
   });
 
   return !this.get(name);
 };
 
+// removeAll is test only
 Cooker.prototype.removeAll = function() {
   this.updateCollection();
   this._collection.removeAll();
