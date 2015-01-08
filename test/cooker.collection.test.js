@@ -27,7 +27,7 @@ describe('collection', function() {
     assert.strictEqual(jsons[0].name, '__utma');
   });
 
-  it('saveAll and removeAll', function() {
+  it('saveAll', function() {
     this.col.saveAll();
     assert.strictEqual(document.cookie, SAMPLE_COOKE_STR_ENCODED);
   });

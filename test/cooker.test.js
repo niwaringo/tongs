@@ -6,6 +6,10 @@ describe('Cooker', function() {
     this.cooker = new Cooker();
   });
 
+  after(function() {
+    this.cooker.removeAll();
+  });
+
   it('set cookie', function() {
     this.cooker.cookie('name', 'value');
     assert.strictEqual(document.cookie, 'name=value');
@@ -13,5 +17,6 @@ describe('Cooker', function() {
 
   it('get cookie', function() {
     this.cooker.cookie('name', 'value');
+    assert.strictEqual(this.cooker.cookie('name'), 'value');
   });
 });
