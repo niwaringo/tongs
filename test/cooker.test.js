@@ -46,13 +46,15 @@ describe('Cooker', function() {
 
   it('update success', function() {
     this.cooker.create('name', 'value');
-    this.cooker.update('name', 'new_value');
+    var result = this.cooker.update('name', 'new_value');
     assert.strictEqual(document.cookie, 'name=new_value');
+    assert(result);
   });
 
   it('update error', function() {
-    this.cooker.update('name', 'value');
+    var result = this.cooker.update('name', 'value');
     assert.strictEqual(document.cookie, '');
+    assert(!result);
   });
 
   it('toJson', function() {

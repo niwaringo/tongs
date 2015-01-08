@@ -56,8 +56,10 @@ Cooker.prototype.create = function(name, value) {
  * @param {string} value
  */
 Cooker.prototype.update = function(name, value) {
-  if (!this.get(name)) return;
+  if (!this.get(name)) return false;
   this.set(name, value);
+
+  return this.get(name) === value;
 };
 
 /**
