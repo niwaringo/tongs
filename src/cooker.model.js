@@ -124,6 +124,7 @@ CookerModel.prototype.save = function() {
 
 /**
  * @return {this}
+ * @return {boolean}
  */
 CookerModel.prototype.remove = function() {
   this.updateOptions({expires: new Date(1970, 1, 1)});
