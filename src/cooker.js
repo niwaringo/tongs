@@ -69,6 +69,13 @@ Cooker.prototype.toJSON = function() {
 };
 
 /**
+ * @param {function} callback
+ */
+// Cooker.prototype.each(function(callback) {
+//
+// };
+
+/**
  * @param {string} name
  */
 Cooker.prototype.remove = function(name) {
