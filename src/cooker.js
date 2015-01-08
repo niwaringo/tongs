@@ -26,7 +26,7 @@ Cooker.prototype.cookie = function(name, value) {
  */
 Cooker.prototype.get = function(name) {
   if (this._collection._models.length === 0 || !this._collection.get(name)) return;
-  return this._collection.get(name).value;
+  return decodeURIComponent(this._collection.get(name).value);
 };
 
 /**
