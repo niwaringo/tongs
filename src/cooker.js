@@ -45,8 +45,9 @@ Cooker.prototype.set = function(name, value, option) {
  * @param {string} value
  */
 Cooker.prototype.create = function(name, value) {
-  if (this.get(name)) return;
+  if (this.get(name)) return false;
   this.set(name, value);
+  return !!this.get(name);
 };
 
 /**

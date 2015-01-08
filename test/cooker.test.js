@@ -32,14 +32,16 @@ describe('Cooker', function() {
   });
 
   it('create sccess', function() {
-    this.cooker.create('name', 'value');
+    var result = this.cooker.create('name', 'value');
     assert.strictEqual(document.cookie, 'name=value');
+    assert(result);
   });
 
   it('create error', function() {
     this.cooker.create('name', 'value');
-    this.cooker.create('name', 'new_value');
+    var result = this.cooker.create('name', 'new_value');
     assert.strictEqual(document.cookie, 'name=value');
+    assert(!result);
   });
 
   it('update success', function() {
