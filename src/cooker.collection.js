@@ -20,19 +20,18 @@ CookerCollection.prototype.toModels = function(cookie) {
       return modelify(cookie);
     });
   }
-  else if (Object.prototype.toString.call(cookie) === '[object Array]') {
-    return cookie.map(function(cookie) {
-      return modelify(cookie);
-    });
-  }
-
+  // else if (Object.prototype.toString.call(cookie) === '[object Array]') {
+  //   return cookie.map(function(cookie) {
+  //     return modelify(cookie);
+  //   });
+  // }
   return [];
 };
 
 CookerCollection.prototype.get = function(name) {
   var _model;
 
-  this._models.forEach(function(model) {
+  this.each(function(model) {
     if (model.name === name) {
       _model = model;
       return;
@@ -53,22 +52,6 @@ CookerCollection.prototype.each = function(callback, thisArg) {
 };
 
 /**
- * @param {function} callback
- * @return {array}
- */
-CookerCollection.prototype.filter = function(callback, thisArg) {
-  var cookies = [];
-
-  this._models.map(function(model) {
-    thisArg = thisArg || this;
-    if (callback.call(thisArg, model)) {
-      cookies.push(decodeURIComponent(model.attrs[0]));
-    }
-  });
-  return new CookerCollection(cookies);
-};
-
-/**
  * @return {array<object>}
  */
 CookerCollection.prototype.toJSON = function() {
@@ -81,14 +64,8 @@ CookerCollection.prototype.toJSON = function() {
   });
 };
 
-CookerCollection.prototype.saveAll = function() {
-  this._models.forEach(function(model) {
-    model.save();
-  });
-};
-
 CookerCollection.prototype.removeAll = function() {
-  this._models.forEach(function(model) {
+  this.each(function(model) {
     model.remove();
   });
 };

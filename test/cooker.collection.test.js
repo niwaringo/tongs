@@ -27,13 +27,10 @@ describe('collection', function() {
     assert.strictEqual(jsons[0].name, '__utma');
   });
 
-  it('saveAll', function() {
-    this.col.saveAll();
-    assert.strictEqual(document.cookie, SAMPLE_COOKE_STR_ENCODED);
-  });
-
   it('removeAll', function() {
-    this.col.saveAll();
+    this.col.each(function(model) {
+      model.save();
+    });
     this.col.removeAll();
     assert.strictEqual(document.cookie, '');
   });
@@ -45,20 +42,5 @@ describe('collection', function() {
     });
 
     assert.strictEqual(ar.toString(), ['__utma', '__utmc', '__utmz'].toString());
-  });
-
-  it('filter', function() {
-    var col = this.col.filter(function(model) {
-      return model.name === '__utmc';
-    });
-
-    assert.strictEqual(col._models[0].value, '456');
-  });
-});
-
-describe('collection(array initiaize)', function() {
-  it('initiaize', function() {
-    var col = new CookerCollection(['name=value']);
-    assert.strictEqual(col._models[0].name, 'name');
   });
 });
