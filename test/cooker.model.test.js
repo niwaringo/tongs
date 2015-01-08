@@ -25,9 +25,8 @@ describe('model', function() {
   it('remove', function() {
     var co = new CookerModel('name', 'val');
     co.save();
-    // co.remove();
+    co.remove();
 
-    // assert.strictEqual(document.cookie, '');
+    assert.strictEqual(document.cookie, '');
   });
 });
-

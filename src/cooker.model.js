@@ -83,10 +83,10 @@ var CookerModel = function(name, value, option) {
   this.name = encodeURIComponent(name);
   this.value = encodeURIComponent(value);
   this.attrs = [];
-  this.option = {};
+  this.option = option || {};
 
   this.attrs.push(concatKeyVal(this.name, this.value));
-  this.updateOptions(option);
+  this.updateOptions(this.option);
 };
 
 /**
@@ -116,11 +116,18 @@ CookerModel.prototype.toString = function() {
 /**
  * @return {this}
  */
-
 CookerModel.prototype.save = function() {
   document.cookie = this.toString();
 
   return this;
+};
+
+/**
+ * @return {this}
+ */
+CookerModel.prototype.remove = function() {
+  this.updateOptions({expires: new Date(1970, 1, 1)});
+  this.save();
 };
 
 module.exports = CookerModel;
