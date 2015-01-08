@@ -94,6 +94,10 @@ Cooker.prototype.updateCollection = function() {
 
 module.exports = Cooker;
 
+var instance;
 global.cooker = function() {
-  return new Cooker();
+  if (instance) return instance;
+
+  instance = new Cooker();
+  return instance;
 };
