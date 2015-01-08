@@ -37,4 +37,28 @@ describe('collection', function() {
     this.col.removeAll();
     assert.strictEqual(document.cookie, '');
   });
+
+  it('each', function() {
+    var ar = [];
+    this.col.each(function(model) {
+      ar.push(model.name);
+    });
+
+    assert.strictEqual(ar.toString(), ['__utma', '__utmc', '__utmz'].toString());
+  });
+
+  // it('filter', function() {
+  //   var col = this.col.filter(function(model) {
+  //     return model.name === '__utmc';
+  //   });
+  //
+  //   assert.strictEqual(col._models[0].value, '456');
+  // });
+});
+
+describe('collection(array initiaize)', function() {
+  it('initiaize', function() {
+    var col = new CookerCollection(['name=value']);
+    assert.strictEqual(col._models[0].name, 'name');
+  });
 });

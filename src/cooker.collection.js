@@ -1,23 +1,30 @@
 var Model = require('cooker.model');
 
-var CookerCollection = function(cookie) {
-  this._models = this.toModels(cookie);
-};
-
 function modelify(cookie) {
   var cookie_key_vals = cookie.split(/=(.+)/);
 
   return new Model(cookie_key_vals[0], cookie_key_vals[1]);
 }
 
+var CookerCollection = function(cookie) {
+  this._models = this.toModels(cookie);
+};
+
 /**
  * @param {string} cookie
  * @return {array<Model>}
  */
 CookerCollection.prototype.toModels = function(cookie) {
-  return cookie.split('; ').map(function(cookie) {
-    return modelify(cookie);
-  });
+  if (Object.prototype.toString.call(cookie) === '[object String]') {
+    return cookie.split('; ').map(function(cookie) {
+      return modelify(cookie);
+    });
+  }
+  else if (Object.prototype.toString.call(cookie) === '[object Array]') {
+    return cookie.map(function(cookie) {
+      return modelify(cookie);
+    });
+  }
 };
 
 CookerCollection.prototype.get = function(name) {
@@ -32,6 +39,21 @@ CookerCollection.prototype.get = function(name) {
 
   return _model;
 };
+
+/**
+ * @param {function} callback
+ */
+CookerCollection.prototype.each = function(callback, thisArg) {
+  this._models.forEach(function(model) {
+    thisArg = thisArg || this;
+    callback.call(thisArg, model);
+  });
+};
+
+/**
+ * @param {function} callback
+ * @return {array}
+ */
 
 /**
  * @return {array<object>}
