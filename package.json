@@ -1,6 +1,6 @@
 {
-  "name": "cooker",
-  "version": "0.5",
+  "name": "cookiecooker",
+  "version": "0.5.0",
   "description": "cookie utility",
   "main": "./src/cooker.js",
   "scripts": {
