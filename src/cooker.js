@@ -11,16 +11,33 @@ var Cooker = function() {
 
 /**
  * @param {string} name
- * @param {string} value
+ * @return {string}
+ */
+Cooker.prototype.get = function(name) {
+  return this._collection.get(name).value;
+};
+
+/**
+ *  @param {string} name
+ *  @param {string} value
+ *  @return {void}
+ */
+Cooker.prototype.set = function(name, value) {
+  new Model(name, value).save();
+  this.update();
+};
+
+/**
+ * @param {string} name
+ * @param {string} [value]
  */
 Cooker.prototype.cookie = function(name, value) {
   if (value) {
-    new Model(name, value).save();
-    this.update();
+    this.set(name, value);
     return;
   }
 
-  return this._collection.get(name).value;
+  return this.get(name);
 };
 
 Cooker.prototype.update = function() {
