@@ -36,4 +36,26 @@ describe('Cooker', function() {
     this.cooker.create('name', 'new_value');
     assert.strictEqual(document.cookie, 'name=value');
   });
+
+  it('update success', function() {
+    this.cooker.create('name', 'value');
+    this.cooker.update('name', 'new_value');
+    assert.strictEqual(document.cookie, 'name=new_value');
+  });
+
+  it('update error', function() {
+    this.cooker.update('name', 'value');
+    assert.strictEqual(document.cookie, '');
+  });
+
+  it('toJson', function() {
+    this.cooker.create('name', 'value');
+    var jsons = this.cooker.toJSON();
+    assert.strictEqual(jsons[0].name, 'name');
+  });
+
+  it('each', function() {
+    this.cooker.create('name1', 'value1');
+    this.cooker.create('name2', 'value2');
+  });
 });

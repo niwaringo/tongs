@@ -51,6 +51,24 @@ Cooker.prototype.create = function(name, value) {
 };
 
 /**
+ * update is only overwrite
+ * @param {string} name
+ * @param {string} value
+ */
+Cooker.prototype.update = function(name, value) {
+  if (!this.get(name)) return;
+  this.set(name, value);
+};
+
+/**
+ * @return {array<object>}
+ */
+Cooker.prototype.toJSON = function() {
+  this.updateCollection;
+  return this._collection.toJSON();
+};
+
+/**
  * @param {string} name
  */
 Cooker.prototype.remove = function(name) {
@@ -59,9 +77,8 @@ Cooker.prototype.remove = function(name) {
 };
 
 Cooker.prototype.removeAll = function() {
-  this.updateCollection();
   this._collection.removeAll();
-  this.updateCollection;
+  this.updateCollection();
 };
 
 Cooker.prototype.updateCollection = function() {
@@ -69,7 +86,6 @@ Cooker.prototype.updateCollection = function() {
     this._collection = new Collection(document.cookie);
   }
 };
-
 
 module.exports = Cooker;
 
