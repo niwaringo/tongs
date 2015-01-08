@@ -4,7 +4,7 @@ var SAMPLE_COOKE_STR = "__utma=123; __utmc=456; __utmz=789.utmcsr=(direct)|utmcc
 var SAMPLE_COOKE_STR_ENCODED = "__utma=123; __utmc=456; __utmz=789.utmcsr%3D(direct)%7Cutmccn%3D(direct)%7Cutmcmd%3D(none)";
 
 describe('collection', function() {
-  before(function() {
+  beforeEach(function() {
     this.col = new CookerCollection(SAMPLE_COOKE_STR);
   });
 
