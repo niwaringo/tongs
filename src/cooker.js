@@ -11,9 +11,9 @@ var Cooker = function() {
  * @param {string} name
  * @param {string} [value]
  */
-Cooker.prototype.cookie = function(name, value) {
+Cooker.prototype.cookie = function(name, value, option) {
   if (value) {
-    this.set(name, value);
+    this.set(name, value, option);
     return;
   }
 
@@ -34,8 +34,8 @@ Cooker.prototype.get = function(name) {
  *  @param {string} value
  *  @return {void}
  */
-Cooker.prototype.set = function(name, value) {
-  new Model(name, value).save();
+Cooker.prototype.set = function(name, value, option) {
+  new Model(name, value, option).save();
   this.updateCollection();
 };
 
