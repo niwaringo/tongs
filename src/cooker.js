@@ -4,7 +4,7 @@ var Model = require('cooker.model');
 var Collection = require('cooker.collection');
 
 var Cooker = function() {
-  this._collection = new Collection();
+  this.updateCollection();
 };
 
 /**
