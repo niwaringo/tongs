@@ -23,7 +23,7 @@ CookerCollection.prototype.toModels = function(cookie) {
 CookerCollection.prototype.get = function(name) {
   var _model;
 
-  this._models.some(function(model) {
+  this._models.forEach(function(model) {
     if (model.name === name) {
       _model = model;
       return;

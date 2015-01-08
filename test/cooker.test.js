@@ -32,9 +32,8 @@ describe('Cooker', function() {
   });
 
   it('create error', function() {
-    console.log(document.cookie);
     this.cooker.create('name', 'value');
-    // this.cooker.create('name', 'new_value');
+    this.cooker.create('name', 'new_value');
     assert.strictEqual(document.cookie, 'name=value');
   });
 });
