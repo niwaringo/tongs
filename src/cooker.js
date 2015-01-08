@@ -15,9 +15,12 @@ var Cooker = function() {
  */
 Cooker.prototype.cookie = function(name, value) {
   if (value) {
+    new Model(name, value).save();
+    this.update();
+    return;
   }
-  var model = new Model(name, value);
-  model.save();
+
+  return this._collection.get(name).value;
 };
 
 Cooker.prototype.update = function() {
