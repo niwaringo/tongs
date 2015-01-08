@@ -54,6 +54,17 @@ CookerCollection.prototype.each = function(callback, thisArg) {
  * @param {function} callback
  * @return {array}
  */
+CookerCollection.prototype.filter = function(callback, thisArg) {
+  var cookies = [];
+
+  this._models.map(function(model) {
+    thisArg = thisArg || this;
+    if (callback.call(thisArg, model)) {
+      cookies.push(decodeURIComponent(model.attrs[0]));
+    }
+  });
+  return new CookerCollection(cookies);
+};
 
 /**
  * @return {array<object>}

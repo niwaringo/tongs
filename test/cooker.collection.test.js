@@ -47,13 +47,13 @@ describe('collection', function() {
     assert.strictEqual(ar.toString(), ['__utma', '__utmc', '__utmz'].toString());
   });
 
-  // it('filter', function() {
-  //   var col = this.col.filter(function(model) {
-  //     return model.name === '__utmc';
-  //   });
-  //
-  //   assert.strictEqual(col._models[0].value, '456');
-  // });
+  it('filter', function() {
+    var col = this.col.filter(function(model) {
+      return model.name === '__utmc';
+    });
+
+    assert.strictEqual(col._models[0].value, '456');
+  });
 });
 
 describe('collection(array initiaize)', function() {
