@@ -1,7 +1,7 @@
 {
   "name": "cooker",
-  "version": "0.0.1",
-  "description": "cookie util",
+  "version": "0.5",
+  "description": "cookie utility",
   "main": "./src/cooker.js",
   "scripts": {
     "test": "./node_modules/karma/bin/karma start",
@@ -13,7 +13,8 @@
     "cooker.collection": "./src/cooker.collection.js"
   },
   "keywords": [
-    "cookie"
+    "cookie",
+    "browserify"
   ],
   "author": "niwaringo@gmail.com",
   "license": "MIT",
