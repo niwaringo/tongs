@@ -17,6 +17,11 @@
     "browserify"
   ],
   "author": "niwaringo@gmail.com",
+  "homepage": "https://github.com/niwaringo/cookiecooker",
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:niwaringo/cookiecooker.git"
+  },
   "license": "MIT",
   "devDependencies": {
     "browserify": "^8.0.3",
