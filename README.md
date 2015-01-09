@@ -3,29 +3,49 @@ cookiecooker
 
 cookie utility
 
+Install
+-------
+
+### npm
+
+```javascript
+npm install cookiecooker
+```
+
+### browser
+
+[Download here](https://raw.githubusercontent.com/niwaringo/cookiecooker/master/dist/cooker.js)
+
+```html
+<script src="cooker.js"></script>
+<script>
+cooker().cookie('name', 'value');
+</script>
+```
+
 Usage
 -----
 
-Set cookie:
+### Set cookie:
 
 ```javascript
 cooker().cookie('name', 'value');
 ```
 
-Set cookie with option:
+### Set cookie with option:
 
 ```javascript
 cooker().cookie('name', 'value', {expires: new Date(2020, 0, 8), path: '/'});
 ```
 
-Get Cookie:
+### Get Cookie:
 
 ```javascript
 cooker().cookie('name'); // => value
 cooker().cookie('nothing'); // => undefined
 ```
 
-Remove Cookie:
+### Remove Cookie:
 
 ```javascript
 cooker().remove('name'); // => true
@@ -37,14 +57,14 @@ cooker().remove('path_cookie'); // => false
 cooker().remove('path_cookie', {path: '/'}); // => true
 ```
 
-toJSON:
+### toJSON:
 
 ```javascript
 // document.cookie => "name1=value1; name2=value2"
 cooker().toJSON(); // => [{name: 'name1', value: 'value1'}, {name: 'name2', value: 'value2'}]
 ```
 
-each:
+### each:
 
 ```javascript
 // document.cookie => "name1=value1; name2=value2"
@@ -55,7 +75,7 @@ cooker().each(function(cookie) {
 // => name2 value2
 ```
 
-CreateMethod:
+### Create:
 
 ```javascript
 // document.cookie => ''
@@ -64,7 +84,7 @@ cooker().create('name', 'value'); // => true | document.cookie => 'name=value'
 cooker().create('name', 'new_value'); // => false | document.cookie => 'name=value'
 ```
 
-UpdateMethod:
+### Update:
 
 ```javascript
 // document.cookie => 'name=value'
