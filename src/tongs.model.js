@@ -79,7 +79,7 @@ function constructOptionObject(obj) {
  *  @param {string} name
  *  @param {string} value
  */
-var CookerModel = function(name, value, option) {
+var TongsModel = function(name, value, option) {
   this.name = encodeURIComponent(name);
   this.value = encodeURIComponent(value);
   this.attrs = [];
@@ -93,7 +93,7 @@ var CookerModel = function(name, value, option) {
  * @param {object} option
  * @return {this}
  */
-CookerModel.prototype.updateOptions = function(option) {
+TongsModel.prototype.updateOptions = function(option) {
   this.option = extend(this.option, constructOptionObject(option));
   this.attrs.length = 1;
   
@@ -109,14 +109,14 @@ CookerModel.prototype.updateOptions = function(option) {
 /**
  * @return {string}
  */
-CookerModel.prototype.toString = function() {
+TongsModel.prototype.toString = function() {
   return this.attrs.join('; ');
 };
 
 /**
  * @return {this}
  */
-CookerModel.prototype.save = function() {
+TongsModel.prototype.save = function() {
   document.cookie = this.toString();
 
   return this;
@@ -126,10 +126,10 @@ CookerModel.prototype.save = function() {
  * @return {this}
  * @return {boolean}
  */
-CookerModel.prototype.remove = function(option) {
+TongsModel.prototype.remove = function(option) {
   option = option || {};
   this.updateOptions(extend(option, {expires: new Date(1970, 1, 1)}));
   this.save();
 };
 
-module.exports = CookerModel;
+module.exports = TongsModel;

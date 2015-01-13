@@ -1,9 +1,9 @@
 'use strict';
 
-var Model = require('cooker.model');
-var Collection = require('cooker.collection');
+var Model = require('tongs.model');
+var Collection = require('tongs.collection');
 
-var Cooker = function() {
+var Tongs = function() {
   this.updateCollection();
 };
 
@@ -11,7 +11,7 @@ var Cooker = function() {
  * @param {string} name
  * @param {string} [value]
  */
-Cooker.prototype.cookie = function(name, value, option) {
+Tongs.prototype.cookie = function(name, value, option) {
   if (value) {
     this.set(name, value, option);
     return;
@@ -24,7 +24,7 @@ Cooker.prototype.cookie = function(name, value, option) {
  * @param {string} name
  * @return {string}
  */
-Cooker.prototype.get = function(name) {
+Tongs.prototype.get = function(name) {
   this.updateCollection();
   if (this._collection._models.length === 0 || !this._collection.get(name)) return;
   return decodeURIComponent(this._collection.get(name).value);
@@ -35,7 +35,7 @@ Cooker.prototype.get = function(name) {
  *  @param {string} value
  *  @return {void}
  */
-Cooker.prototype.set = function(name, value, option) {
+Tongs.prototype.set = function(name, value, option) {
   new Model(name, value, option).save();
 };
 
@@ -44,7 +44,7 @@ Cooker.prototype.set = function(name, value, option) {
  * @param {string} name
  * @param {string} value
  */
-Cooker.prototype.create = function(name, value) {
+Tongs.prototype.create = function(name, value) {
   if (this.get(name)) return false;
   this.set(name, value);
   return !!this.get(name);
@@ -55,7 +55,7 @@ Cooker.prototype.create = function(name, value) {
  * @param {string} name
  * @param {string} value
  */
-Cooker.prototype.update = function(name, value) {
+Tongs.prototype.update = function(name, value) {
   if (!this.get(name)) return false;
   this.set(name, value);
 
@@ -65,7 +65,7 @@ Cooker.prototype.update = function(name, value) {
 /**
  * @return {array<object>}
  */
-Cooker.prototype.toJSON = function() {
+Tongs.prototype.toJSON = function() {
   this.updateCollection();
   return this._collection.toJSON();
 };
@@ -73,7 +73,7 @@ Cooker.prototype.toJSON = function() {
 /**
  * @param {function} callback
  */
-Cooker.prototype.each = function(callback, thisArg) {
+Tongs.prototype.each = function(callback, thisArg) {
   this.updateCollection();
   this._collection.each(callback, thisArg);
 };
@@ -82,7 +82,7 @@ Cooker.prototype.each = function(callback, thisArg) {
  * @param {string} name
  * @return {boolean}
  */
-Cooker.prototype.remove = function(name, option) {
+Tongs.prototype.remove = function(name, option) {
   if (!this.get(name)) return false;
 
   this.each(function(model) {
@@ -95,23 +95,23 @@ Cooker.prototype.remove = function(name, option) {
 };
 
 // removeAll is test only
-Cooker.prototype.removeAll = function() {
+Tongs.prototype.removeAll = function() {
   this.updateCollection();
   this._collection.removeAll();
 };
 
-Cooker.prototype.updateCollection = function() {
+Tongs.prototype.updateCollection = function() {
   if (document) {
     this._collection = new Collection(document.cookie);
   }
 };
 
-module.exports = Cooker;
+module.exports = Tongs;
 
 var instance;
-global.cooker = function() {
+global.tongs = function() {
   if (instance) return instance;
 
-  instance = new Cooker();
+  instance = new Tongs();
   return instance;
 };

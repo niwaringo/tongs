@@ -1,26 +1,26 @@
 {
-  "name": "cookiecooker",
+  "name": "tongs",
   "version": "0.5.2",
   "description": "cookie utility",
-  "main": "./src/cooker.js",
+  "main": "./src/tongs.js",
   "scripts": {
     "test": "./node_modules/karma/bin/karma start",
-    "build": "./node_modules/browserify/bin/cmd.js ./src/cooker.js -o ./dist/cooker.js"
+    "build": "./node_modules/browserify/bin/cmd.js ./src/tongs.js -o ./dist/tongs.js"
   },
   "browser": {
-    "cooker": "./src/cooker.js",
-    "cooker.model": "./src/cooker.model.js",
-    "cooker.collection": "./src/cooker.collection.js"
+    "tongs": "./src/tongs.js",
+    "tongs.model": "./src/tongs.model.js",
+    "tongs.collection": "./src/tongs.collection.js"
   },
   "keywords": [
     "cookie",
     "browserify"
   ],
   "author": "niwaringo@gmail.com",
-  "homepage": "https://github.com/niwaringo/cookiecooker",
+  "homepage": "https://github.com/niwaringo/tongs",
   "repository": {
     "type": "git",
-    "url": "git@github.com:niwaringo/cookiecooker.git"
+    "url": "git@github.com:niwaringo/tongs.git"
   },
   "license": "MIT",
   "devDependencies": {

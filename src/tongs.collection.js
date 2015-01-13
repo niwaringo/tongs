@@ -1,4 +1,4 @@
-var Model = require('cooker.model');
+var Model = require('tongs.model');
 
 function modelify(cookie) {
   var cookie_key_vals = cookie.split(/=(.+)/);
@@ -6,7 +6,7 @@ function modelify(cookie) {
   return new Model(cookie_key_vals[0], cookie_key_vals[1]);
 }
 
-var CookerCollection = function(cookie) {
+var TongsCollection = function(cookie) {
   this._models = this.toModels(cookie);
 };
 
@@ -14,7 +14,7 @@ var CookerCollection = function(cookie) {
  * @param {string} cookie
  * @return {array<Model>}
  */
-CookerCollection.prototype.toModels = function(cookie) {
+TongsCollection.prototype.toModels = function(cookie) {
   if (Object.prototype.toString.call(cookie) === '[object String]') {
     return cookie.split('; ').map(function(cookie) {
       return modelify(cookie);
@@ -28,7 +28,7 @@ CookerCollection.prototype.toModels = function(cookie) {
   return [];
 };
 
-CookerCollection.prototype.get = function(name) {
+TongsCollection.prototype.get = function(name) {
   var _model;
 
   this.each(function(model) {
@@ -44,7 +44,7 @@ CookerCollection.prototype.get = function(name) {
 /**
  * @param {function} callback
  */
-CookerCollection.prototype.each = function(callback, thisArg) {
+TongsCollection.prototype.each = function(callback, thisArg) {
   this._models.forEach(function(model) {
     thisArg = thisArg || this;
     callback.call(thisArg, model);
@@ -54,7 +54,7 @@ CookerCollection.prototype.each = function(callback, thisArg) {
 /**
  * @return {array<object>}
  */
-CookerCollection.prototype.toJSON = function() {
+TongsCollection.prototype.toJSON = function() {
   return this._models.map(function(model) {
     var json = {};
     json.name = model.name;
@@ -64,10 +64,10 @@ CookerCollection.prototype.toJSON = function() {
   });
 };
 
-CookerCollection.prototype.removeAll = function() {
+TongsCollection.prototype.removeAll = function() {
   this.each(function(model) {
     model.remove();
   });
 };
 
-module.exports = CookerCollection;
+module.exports = TongsCollection;

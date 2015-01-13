@@ -1,5 +1,5 @@
-cookiecooker
-============
+tongs
+=====
 
 cookie utility
 
@@ -9,17 +9,17 @@ Install
 ### npm
 
 ```javascript
-npm install cookiecooker
+npm install tongs
 ```
 
 ### browser
 
-[Download here](https://raw.githubusercontent.com/niwaringo/cookiecooker/master/dist/cooker.js)
+[Download here](https://raw.githubusercontent.com/niwaringo/tongs/master/dist/tongs.js)
 
 ```html
-<script src="cooker.js"></script>
+<script src="tongs.js"></script>
 <script>
-cooker().cookie('name', 'value');
+tongs().cookie('name', 'value');
 </script>
 ```
 
@@ -29,46 +29,46 @@ Usage
 ### Set cookie:
 
 ```javascript
-cooker().cookie('name', 'value');
+tongs().cookie('name', 'value');
 ```
 
 ### Set cookie with option:
 
 ```javascript
-cooker().cookie('name', 'value', {expires: new Date(2020, 0, 8), path: '/'});
+tongs().cookie('name', 'value', {expires: new Date(2020, 0, 8), path: '/'});
 ```
 
 ### Get Cookie:
 
 ```javascript
-cooker().cookie('name'); // => value
-cooker().cookie('nothing'); // => undefined
+tongs().cookie('name'); // => value
+tongs().cookie('nothing'); // => undefined
 ```
 
 ### Remove Cookie:
 
 ```javascript
-cooker().remove('name'); // => true
-cooker().remove('nothing'); // => false
+tongs().remove('name'); // => true
+tongs().remove('nothing'); // => false
 
 //with option
-cooker().cookie('path_cookie', 'value', {path: '/'});
-cooker().remove('path_cookie'); // => false
-cooker().remove('path_cookie', {path: '/'}); // => true
+tongs().cookie('path_cookie', 'value', {path: '/'});
+tongs().remove('path_cookie'); // => false
+tongs().remove('path_cookie', {path: '/'}); // => true
 ```
 
 ### toJSON:
 
 ```javascript
 // document.cookie => "name1=value1; name2=value2"
-cooker().toJSON(); // => [{name: 'name1', value: 'value1'}, {name: 'name2', value: 'value2'}]
+tongs().toJSON(); // => [{name: 'name1', value: 'value1'}, {name: 'name2', value: 'value2'}]
 ```
 
 ### each:
 
 ```javascript
 // document.cookie => "name1=value1; name2=value2"
-cooker().each(function(cookie) {
+tongs().each(function(cookie) {
   console.log(cookie.name + ' ' + cookie.value);
 });
 // => name1 value1
@@ -79,16 +79,16 @@ cooker().each(function(cookie) {
 
 ```javascript
 // document.cookie => ''
-cooker().create('name', 'value'); // => true | document.cookie => 'name=value'
+tongs().create('name', 'value'); // => true | document.cookie => 'name=value'
 // document.cookie => 'name=value'
-cooker().create('name', 'new_value'); // => false | document.cookie => 'name=value'
+tongs().create('name', 'new_value'); // => false | document.cookie => 'name=value'
 ```
 
 ### Update:
 
 ```javascript
 // document.cookie => 'name=value'
-cooker().update('name', 'new_value'); // => true | document.cookie => 'name=new_value'
+tongs().update('name', 'new_value'); // => true | document.cookie => 'name=new_value'
 // document.cookie => ''
-cooker().update('name', 'new_value'); // => false | document.cookie => ''
+tongs().update('name', 'new_value'); // => false | document.cookie => ''
 ```

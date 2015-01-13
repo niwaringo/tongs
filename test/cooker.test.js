@@ -1,73 +1,73 @@
-var Cooker = require('cooker');
+var Tongs = require('tongs');
 var assert = require('assert');
 
-describe('Cooker', function() {
+describe('Tongs', function() {
   beforeEach(function() {
-    this.cooker = new Cooker();
+    this.tongs = new Tongs();
   });
 
   afterEach(function() {
-    this.cooker.removeAll();
+    this.tongs.removeAll();
   });
 
   it('set cookie', function() {
-    this.cooker.cookie('name', 'value');
+    this.tongs.cookie('name', 'value');
     assert.strictEqual(document.cookie, 'name=value');
   });
 
   it('get cookie', function() {
-    this.cooker.cookie('name', 'value');
-    assert.strictEqual(this.cooker.cookie('name'), 'value');
+    this.tongs.cookie('name', 'value');
+    assert.strictEqual(this.tongs.cookie('name'), 'value');
   });
 
   it('remove suceess', function() {
-    this.cooker.cookie('name', 'value');
-    var result = this.cooker.remove('name');
+    this.tongs.cookie('name', 'value');
+    var result = this.tongs.remove('name');
     assert.strictEqual(document.cookie, '');
     assert(result);
   });
 
   it('remove error', function() {
-    assert(!this.cooker.remove('nothing'));
+    assert(!this.tongs.remove('nothing'));
   });
 
   it('create sccess', function() {
-    var result = this.cooker.create('name', 'value');
+    var result = this.tongs.create('name', 'value');
     assert.strictEqual(document.cookie, 'name=value');
     assert(result);
   });
 
   it('create error', function() {
-    this.cooker.create('name', 'value');
-    var result = this.cooker.create('name', 'new_value');
+    this.tongs.create('name', 'value');
+    var result = this.tongs.create('name', 'new_value');
     assert.strictEqual(document.cookie, 'name=value');
     assert(!result);
   });
 
   it('update success', function() {
-    this.cooker.create('name', 'value');
-    var result = this.cooker.update('name', 'new_value');
+    this.tongs.create('name', 'value');
+    var result = this.tongs.update('name', 'new_value');
     assert.strictEqual(document.cookie, 'name=new_value');
     assert(result);
   });
 
   it('update error', function() {
-    var result = this.cooker.update('name', 'value');
+    var result = this.tongs.update('name', 'value');
     assert.strictEqual(document.cookie, '');
     assert(!result);
   });
 
   it('toJson', function() {
-    this.cooker.create('name', 'value');
-    var jsons = this.cooker.toJSON();
+    this.tongs.create('name', 'value');
+    var jsons = this.tongs.toJSON();
     assert.strictEqual(jsons[0].name, 'name');
   });
 
   it('each', function() {
     var ar = [];
-    this.cooker.create('name1', 'value1');
-    this.cooker.create('name2', 'value2');
-    this.cooker.each(function(model) {
+    this.tongs.create('name1', 'value1');
+    this.tongs.create('name2', 'value2');
+    this.tongs.each(function(model) {
       ar.push(model.name);
     });
 
