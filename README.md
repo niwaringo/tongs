@@ -2,6 +2,7 @@ tongs
 =====
 
 [![npm version](https://badge.fury.io/js/tongs.svg)](http://badge.fury.io/js/tongs)
+[![Build Status](https://travis-ci.org/niwaringo/tongs.svg?branch=master)](https://travis-ci.org/niwaringo/tongs)
 
 cookie utility
 
