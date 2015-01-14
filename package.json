@@ -4,8 +4,7 @@
   "description": "cookie utility",
   "main": "./src/tongs.js",
   "scripts": {
-    "test": "./node_modules/karma/bin/karma start --browsers Firefox --single-run",
-    "karma": "./node_modules/karma/bin/karma start",
+    "test": "./node_modules/karma/bin/karma start",
     "build": "./node_modules/browserify/bin/cmd.js ./src/tongs.js -o ./dist/tongs.js"
   },
   "browser": {
