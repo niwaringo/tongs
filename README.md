@@ -1,6 +1,8 @@
 tongs
 =====
 
+[![npm version](https://badge.fury.io/js/tongs.svg)](http://badge.fury.io/js/tongs)
+
 cookie utility
 
 Install
