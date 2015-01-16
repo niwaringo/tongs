@@ -85,8 +85,7 @@ var TongsModel = function(name, value, option) {
   this.attrs = [];
   this.option = option || {};
 
-  this.attrs.push(concatKeyVal(this.name, this.value));
-  this.updateOptions(this.option);
+  this.update();
 };
 
 /**
@@ -106,6 +105,14 @@ TongsModel.prototype.updateOptions = function(option) {
   return this;
 };
 
+TongsModel.prototype.update = function() {
+  this.attrs = [];
+  this.attrs.push(concatKeyVal(this.name, this.value));
+  this.updateOptions(this.option);
+
+  return this;
+};
+
 /**
  * @return {string}
  */
@@ -117,6 +124,7 @@ TongsModel.prototype.toString = function() {
  * @return {this}
  */
 TongsModel.prototype.save = function() {
+  this.update();
   document.cookie = this.toString();
 
   return this;
