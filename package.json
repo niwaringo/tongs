@@ -5,7 +5,8 @@
   "main": "./src/tongs.js",
   "scripts": {
     "test": "./node_modules/karma/bin/karma start",
-    "build": "./node_modules/browserify/bin/cmd.js ./src/tongs.js -o ./browser/tongs.js"
+    "build": "./node_modules/browserify/bin/cmd.js ./src/tongs.js -o ./browser/tongs.js",
+    "server": "./node_modules/node-static/bin/cli.js ./browser/"
   },
   "browser": {
     "tongs": "./src/tongs.js",
