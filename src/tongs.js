@@ -27,7 +27,7 @@ Tongs.prototype.cookie = function(name, value, option) {
 Tongs.prototype.get = function(name) {
   this.updateCollection();
   if (this._collection._models.length === 0 || !this._collection.get(name)) return;
-  return decodeURIComponent(this._collection.get(name).value);
+  return decodeURIComponent(this._collection.get(name).value());
 };
 
 /**
@@ -86,7 +86,7 @@ Tongs.prototype.remove = function(name, option) {
   if (!this.get(name)) return false;
 
   this.each(function(model) {
-    if (model.name === name) {
+    if (model.name() === name) {
       model.remove(option);
     }
   });

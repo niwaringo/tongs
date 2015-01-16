@@ -9,8 +9,8 @@ describe('model', function() {
   it('name and value is encoded', function() {
     var co = new TongsModel('ネーム', 'ヴァリュー');
 
-    assert.strictEqual(co.name, '%E3%83%8D%E3%83%BC%E3%83%A0');
-    assert.strictEqual(co.value, '%E3%83%B4%E3%82%A1%E3%83%AA%E3%83%A5%E3%83%BC');
+    assert.strictEqual(co._name, '%E3%83%8D%E3%83%BC%E3%83%A0');
+    assert.strictEqual(co._value, '%E3%83%B4%E3%82%A1%E3%83%AA%E3%83%A5%E3%83%BC');
   });
 
   it('toString', function() {
@@ -32,5 +32,12 @@ describe('model', function() {
     var result = co.remove();
 
     assert.strictEqual(document.cookie, '');
+  });
+
+  it('value overwrite', function() {
+    var co = new TongsModel('name', 'val');
+    co.value('new_val');
+    co.save();
+    assert.strictEqual(document.cookie, 'name=new_val');
   });
 });

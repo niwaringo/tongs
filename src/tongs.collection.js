@@ -32,7 +32,7 @@ TongsCollection.prototype.get = function(name) {
   var _model;
 
   this.each(function(model) {
-    if (model.name === name) {
+    if (model.name() === name) {
       _model = model;
       return;
     }
@@ -57,8 +57,8 @@ TongsCollection.prototype.each = function(callback, thisArg) {
 TongsCollection.prototype.toJSON = function() {
   return this._models.map(function(model) {
     var json = {};
-    json.name = model.name;
-    json.value = decodeURIComponent(model.value);
+    json.name = model.name();
+    json.value = model.value();
 
     return json;
   });

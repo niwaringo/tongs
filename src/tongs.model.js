@@ -80,12 +80,32 @@ function constructOptionObject(obj) {
  *  @param {string} value
  */
 var TongsModel = function(name, value, option) {
-  this.name = encodeURIComponent(name);
-  this.value = encodeURIComponent(value);
+  this._name = encodeURIComponent(name);
+  this._value = encodeURIComponent(value);
   this.attrs = [];
   this.option = option || {};
 
-  this.update();
+  this.attrs.push(concatKeyVal(this._name, this._value));
+  this.updateOptions(this.option);
+};
+
+/**
+ * @param {string} new_name
+ */
+TongsModel.prototype.name = function() {
+  return this._name;
+};
+
+/**
+ * @param {string} new_value;
+ */
+TongsModel.prototype.value = function(new_value) {
+  if (!new_value) return decodeURIComponent(this._value);
+
+  this._value = new_value;
+  this.attrs[0] = concatKeyVal(this._name, this._value);
+
+  return this._value;
 };
 
 /**
@@ -105,14 +125,6 @@ TongsModel.prototype.updateOptions = function(option) {
   return this;
 };
 
-TongsModel.prototype.update = function() {
-  this.attrs = [];
-  this.attrs.push(concatKeyVal(this.name, this.value));
-  this.updateOptions(this.option);
-
-  return this;
-};
-
 /**
  * @return {string}
  */
@@ -124,7 +136,6 @@ TongsModel.prototype.toString = function() {
  * @return {this}
  */
 TongsModel.prototype.save = function() {
-  this.update();
   document.cookie = this.toString();
 
   return this;

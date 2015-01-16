@@ -68,7 +68,7 @@ describe('Tongs', function() {
     this.tongs.create('name1', 'value1');
     this.tongs.create('name2', 'value2');
     this.tongs.each(function(model) {
-      ar.push(model.name);
+      ar.push(model.name());
     });
 
     assert.strictEqual(ar.toString(), ['name1', 'name2'].toString());

@@ -13,12 +13,12 @@ describe('collection', function() {
   });
 
   it('toModels return model array', function() {
-    assert.strictEqual(this.col._models[0].name, '__utma');
-    assert.strictEqual(this.col._models[2].value, encodeURIComponent('789.utmcsr=(direct)|utmccn=(direct)|utmcmd=(none)'));
+    assert.strictEqual(this.col._models[0].name(), '__utma');
+    assert.strictEqual(this.col._models[2].value(), '789.utmcsr=(direct)|utmccn=(direct)|utmcmd=(none)');
   });
 
   it('get', function() {
-    assert.strictEqual(this.col.get('__utmc').value, '456');
+    assert.strictEqual(this.col.get('__utmc').value(), '456');
   });
 
   it('toJSON', function() {
@@ -38,7 +38,7 @@ describe('collection', function() {
   it('each', function() {
     var ar = [];
     this.col.each(function(model) {
-      ar.push(model.name);
+      ar.push(model.name());
     });
 
     assert.strictEqual(ar.toString(), ['__utma', '__utmc', '__utmz'].toString());
