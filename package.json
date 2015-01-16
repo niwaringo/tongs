@@ -6,7 +6,8 @@
   "scripts": {
     "test": "./node_modules/karma/bin/karma start",
     "build": "./node_modules/browserify/bin/cmd.js ./src/tongs.js -o ./browser/tongs.js",
-    "server": "./node_modules/node-static/bin/cli.js ./browser/"
+    "server": "./node_modules/node-static/bin/cli.js ./browser/",
+    "e2elocal": "./node_modules/protractor/bin/protractor ./test/e2e/protractor.local.conf.js"
   },
   "browser": {
     "tongs": "./src/tongs.js",

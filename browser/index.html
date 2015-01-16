@@ -1,16 +1,23 @@
 <html>
 <head>
-  <title>sample cooker</title>
+  <title>tongs top</title>
 </head>
 <body>
-  npm install -g node-static <br>
-  static dist/<br>
-  access http://localhost:8080/sample.html
-  <br>
-  <br>
-  <a href="pathcheck/index.html">path check</a>
+<button type="button" onclick="setCookie('name', 'value')" id="set">Set name:name, value:value</button>
+<button type="button" onclick="createCookie('name', 'new_value')" id="create">Create name:name, value:new_value</button>
+<button type="button" onclick="updateCookie('name', 'updated_value')" id="update">Update name:name, value:updated_value</button>
+<button type="button" onclick="removeCookie('name')" id="del">RemoveCookie name:name</button>
+<br>
+<button type="button" onclick="displayCookieValue('name')" id="get-and-display-cookievalue">Get And Display CookieValue name:name</button>
+<br>
+<button type="button" onclick="eachCookie([['name1', 'value1'],['name2', 'value2']])" id="each">Each name:new_name, value:new_value</button>
+
+<div id="display" style="border:1px dotted #999; padding:8px; width:200px; margin-top:30px;"></div>
+<input type="text" id="date">
+<button type="button" onclick="setCookieWithOption('name', 'value')" id="set-with-option">Set name:name, value:value optin</button>
+
+
 <script src="./tongs.js"></script>
-<script>
-</script>
+<script src="./sample.js"></script>
 </body>
 </html>

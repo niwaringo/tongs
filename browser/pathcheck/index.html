@@ -3,8 +3,16 @@
   <title>sample cooker path check</title>
 </head>
 <body>
-  <a href="../sample.html">back</a>
+  <button type="button" onclick="setCookie('name', 'value')" id="set-not-option">Set name:name, value:value, {}</button>
+  <button type="button" onclick="setCookie('name', 'path_value', {path: '/'})" id="set-with-option">Set name:name, value:value, {path: '/'}</button>
+<button type="button" onclick="removeCookie('name')" id="del-no-option">RemoveCookie name:name, {}</button>
+<button type="button" onclick="removeCookie('name', {path: '/'})" id="del-with-option">RemoveCookie name:name, {path: '/'}</button>
+<br>
+
+<div id="display" style="border:1px dotted #999; padding:8px; width:200px; margin-top:30px;"></div>
+
 <script src="../tongs.js"></script>
+<script src="../sample.js"></script>
 <script>
 </script>
 </body>

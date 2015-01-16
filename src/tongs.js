@@ -26,7 +26,7 @@ Tongs.prototype.cookie = function(name, value, option) {
  */
 Tongs.prototype.get = function(name) {
   this.updateCollection();
-  if (this._collection._models.length === 0 || !this._collection.get(name)) return;
+  if (this._collection._models.length === 0 || !this._collection.get(name)) return '';
   return decodeURIComponent(this._collection.get(name).value());
 };
 

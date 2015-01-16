@@ -33,7 +33,7 @@ TongsCollection.prototype.get = function(name) {
   var _model;
 
   this.each(function(model) {
-    if (model.name === name) {
+    if (model.name() === name) {
       _model = model;
       return;
     }
@@ -58,8 +58,8 @@ TongsCollection.prototype.each = function(callback, thisArg) {
 TongsCollection.prototype.toJSON = function() {
   return this._models.map(function(model) {
     var json = {};
-    json.name = model.name;
-    json.value = decodeURIComponent(model.value);
+    json.name = model.name();
+    json.value = model.value();
 
     return json;
   });
@@ -103,8 +103,8 @@ Tongs.prototype.cookie = function(name, value, option) {
  */
 Tongs.prototype.get = function(name) {
   this.updateCollection();
-  if (this._collection._models.length === 0 || !this._collection.get(name)) return;
-  return decodeURIComponent(this._collection.get(name).value);
+  if (this._collection._models.length === 0 || !this._collection.get(name)) return '';
+  return decodeURIComponent(this._collection.get(name).value());
 };
 
 /**
@@ -163,7 +163,7 @@ Tongs.prototype.remove = function(name, option) {
   if (!this.get(name)) return false;
 
   this.each(function(model) {
-    if (model.name === name) {
+    if (model.name() === name) {
       model.remove(option);
     }
   });
@@ -277,13 +277,32 @@ function constructOptionObject(obj) {
  *  @param {string} value
  */
 var TongsModel = function(name, value, option) {
-  this.name = encodeURIComponent(name);
-  this.value = encodeURIComponent(value);
+  this._name = encodeURIComponent(name);
+  this._value = encodeURIComponent(value);
   this.attrs = [];
   this.option = option || {};
 
-  this.attrs.push(concatKeyVal(this.name, this.value));
+  this.attrs.push(concatKeyVal(this._name, this._value));
   this.updateOptions(this.option);
+};
+
+/**
+ * @param {string} new_name
+ */
+TongsModel.prototype.name = function() {
+  return this._name;
+};
+
+/**
+ * @param {string} new_value;
+ */
+TongsModel.prototype.value = function(new_value) {
+  if (!new_value) return decodeURIComponent(this._value);
+
+  this._value = new_value;
+  this.attrs[0] = concatKeyVal(this._name, this._value);
+
+  return this._value;
 };
 
 /**
