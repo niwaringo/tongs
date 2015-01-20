@@ -2,7 +2,7 @@
 describe('tongs top page', function() {
   browser.ignoreSynchronization = true;
   beforeEach(function() {
-    browser.get('http://localhost:8080/');
+    browser.get(browser.baseUrl);
     browser.manage().deleteAllCookies();
   });
 
@@ -81,14 +81,14 @@ describe('tongs top page', function() {
 describe('tongs top page', function() {
   browser.ignoreSynchronization = true;
   beforeEach(function() {
-    browser.get('http://localhost:8080/pathcheck/');
+    browser.get(browser.baseUrl + '/pathcheck/');
     browser.manage().deleteAllCookies();
   });
 
   it('set no option', function() {
     element(by.id('set-not-option')).click();
     browser.manage().getCookie('name').then(function(cookie) {
-      expect(cookie.path).toEqual('/pathcheck');
+      expect(cookie.path).toEqual('/tongs/browser/pathcheck');
     });
   });
 
