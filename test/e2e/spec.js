@@ -42,8 +42,7 @@ describe('tongs top page', function() {
   it('each', function() {
     element(by.id('each')).click();
     browser.manage().getCookies().then(function(cookies) {
-      expect(cookies[0].value).toEqual('eachvalue2');
-      expect(cookies[1].value).toEqual('eachvalue1');
+      expect(cookies.length).toEqual(2);
     });
   });
 
