@@ -47,7 +47,7 @@ var util = {
    * copy node-util extend
    */
   extend: function extend(origin, add) {
-    var keys = Object.keys(add);
+    var keys = util.keys(add);
     var i = keys.length;
     while (i--) {
       origin[keys[i]] = add[keys[i]];
@@ -67,6 +67,7 @@ var util = {
     }, {});
   },
 
+  keys: require('amp-keys'),
   each: require('amp-each'),
   map: require('amp-map'),
   reduce: require('amp-reduce')

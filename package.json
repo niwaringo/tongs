@@ -38,6 +38,7 @@
   },
   "dependencies": {
     "amp-each": "^1.0.1",
+    "amp-keys": "^1.0.1",
     "amp-map": "^1.0.1",
     "amp-reduce": "^1.0.0"
   }
