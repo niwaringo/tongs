@@ -43,12 +43,12 @@ TongsModel.prototype.value = function(new_value) {
  */
 TongsModel.prototype.updateOptions = function(option) {
   this.option = util.extend(this.option, util.constructOptionObject(option));
-  this.attrs.length = 1;
   
-  var options = Object.keys(this.option).map(function(key) {
-    return this.option[key];
-  }, this);
+  var options = util.map(this.option, function optionMap(value, key) {
+    return value;
+  });
 
+  this.attrs.length = 1;
   this.attrs = this.attrs.concat(options);
 
   return this;
