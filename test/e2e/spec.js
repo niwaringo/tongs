@@ -87,7 +87,8 @@ describe('tongs top page', function() {
   it('set no option', function() {
     element(by.id('set-not-option')).click();
     browser.manage().getCookie('name').then(function(cookie) {
-      expect(cookie.path).toEqual('/tongs/browser/pathcheck');
+      var cookie_path = cookie.path.replace(/\/$/,'');
+      expect(cookie_path).toEqual('/tongs/browser/pathcheck');
     });
   });
 
