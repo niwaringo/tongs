@@ -60,19 +60,16 @@ var util = {
    * @return {object}
    */
   constructOptionObject: function constructOptionObject(obj) {
-    var _obj = {};
-
-    Object.keys(obj).forEach(function(key) {
+    return util.reduce(obj, function(_obj, value, key) {
       if (!(key in util.opt)) return;
       _obj[key] = util.opt[key](obj[key]);
-    });
-
-    return _obj;
+      return _obj;
+    }, {});
   },
 
   each: require('amp-each'),
-  map: require('amp-map')
-
+  map: require('amp-map'),
+  reduce: require('amp-reduce')
 };
 
 module.exports = util;

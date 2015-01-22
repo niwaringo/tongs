@@ -34,7 +34,7 @@ TongsModel.prototype.value = function(new_value) {
   this._value = new_value;
   this.attrs[0] = util.concatKeyVal(this._name, this._value);
 
-  return this._value;
+  return decodeURIComponent(this._value);
 };
 
 /**
