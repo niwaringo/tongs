@@ -1,5 +1,223 @@
 (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
+var objKeys = require('amp-keys');
+var createCallback = require('amp-create-callback');
+
+
+module.exports = function each(obj, iteratee, context) {
+    if (obj == null) return obj;
+    iteratee = createCallback(iteratee, context);
+    var i, length = obj.length;
+    if (length === +length) {
+        for (i = 0; i < length; i++) {
+            iteratee(obj[i], i, obj);
+        }
+    } else {
+        var keys = objKeys(obj);
+        for (i = 0, length = keys.length; i < length; i++) {
+            iteratee(obj[keys[i]], keys[i], obj);
+        }
+    }
+    return obj;
+};
+
+},{"amp-create-callback":2,"amp-keys":3}],2:[function(require,module,exports){
+module.exports = function createCallback(func, context, argCount) {
+    if (context === void 0) return func;
+    switch (argCount) {
+    case 1: 
+        return function(value) {
+            return func.call(context, value);
+        };
+    case 2: 
+        return function(value, other) {
+            return func.call(context, value, other);
+        };
+    case 3: 
+        return function(value, index, collection) {
+            return func.call(context, value, index, collection);
+        };
+    case 4: 
+        return function(accumulator, value, index, collection) {
+            return func.call(context, accumulator, value, index, collection);
+        };
+    }
+    return function() {
+        return func.apply(context, arguments);
+    };
+};
+
+},{}],3:[function(require,module,exports){
+var has = require('amp-has');
+var indexOf = require('amp-index-of');
+var isObject = require('amp-is-object');
+var nativeKeys = Object.keys;
+var hasEnumBug = !({toString: null}).propertyIsEnumerable('toString');
+var nonEnumerableProps = ['constructor', 'valueOf', 'isPrototypeOf', 'toString', 'propertyIsEnumerable', 'hasOwnProperty', 'toLocaleString'];
+
+
+module.exports = function keys(obj) {
+    if (!isObject(obj)) return [];
+    if (nativeKeys) {
+        return nativeKeys(obj);
+    }
+    var result = [];
+    for (var key in obj) if (has(obj, key)) result.push(key);
+    // IE < 9
+    if (hasEnumBug) {
+        var nonEnumIdx = nonEnumerableProps.length;
+        while (nonEnumIdx--) {
+            var prop = nonEnumerableProps[nonEnumIdx];
+            if (has(obj, prop) && indexOf(result, prop) === -1) result.push(prop);
+        }
+    }
+    return result;
+};
+
+},{"amp-has":4,"amp-index-of":5,"amp-is-object":7}],4:[function(require,module,exports){
+var hasOwn = Object.prototype.hasOwnProperty;
+
+
+module.exports = function has(obj, key) {
+    return obj != null && hasOwn.call(obj, key);
+};
+
+},{}],5:[function(require,module,exports){
+var isNumber = require('amp-is-number');
+
+
+module.exports = function indexOf(arr, item, from) {
+    var i = 0;
+    var l = arr && arr.length;
+    if (isNumber(from)) {
+        i = from < 0 ? Math.max(0, l + from) : from;
+    }
+    for (; i < l; i++) {
+        if (arr[i] === item) return i;
+    }
+    return -1;
+};
+
+},{"amp-is-number":6}],6:[function(require,module,exports){
+var toString = Object.prototype.toString;
+
+
+module.exports = function isNumber(obj) {
+    return toString.call(obj) === '[object Number]';
+};
+
+},{}],7:[function(require,module,exports){
+module.exports = function isObject(obj) {
+    var type = typeof obj;
+    return !!obj && (type === 'function' || type === 'object');
+};
+
+},{}],8:[function(require,module,exports){
+var createIteratee = require('amp-iteratee');
+var objKeys = require('amp-keys');
+
+
+module.exports = function map(obj, iteratee, context) {
+    if (obj == null) return [];
+    iteratee = createIteratee(iteratee, context, 3);
+    var keys = obj.length !== +obj.length && objKeys(obj);
+    var length = (keys || obj).length;
+    var results = Array(length);
+    var currentKey;
+    var index = 0;
+    for (; index < length; index++) {
+        currentKey = keys ? keys[index] : index;
+        results[index] = iteratee(obj[currentKey], currentKey, obj);
+    }
+    return results;
+};
+
+},{"amp-iteratee":9,"amp-keys":16}],9:[function(require,module,exports){
+var isFunction = require('amp-is-function');
+var isObject = require('amp-is-object');
+var createCallback = require('amp-create-callback');
+var matches = require('amp-matches');
+var property = require('amp-property');
+var identity = function (val) { return val; };
+
+
+module.exports = function iteratee(value, context, argCount) {
+    if (value == null) return identity;
+    if (isFunction(value)) return createCallback(value, context, argCount);
+    if (isObject(value)) return matches(value);
+    return property(value);
+};
+
+},{"amp-create-callback":10,"amp-is-function":11,"amp-is-object":12,"amp-matches":13,"amp-property":15}],10:[function(require,module,exports){
+arguments[4][2][0].apply(exports,arguments)
+},{"dup":2}],11:[function(require,module,exports){
+var toString = Object.prototype.toString;
+var func = function isFunction(obj) {
+    return toString.call(obj) === '[object Function]';
+};
+
+// Optimize `isFunction` if appropriate. Work around an IE 11 bug.
+if (typeof /./ !== 'function') {
+    func = function isFunction(obj) {
+      return typeof obj == 'function' || false;
+    };
+}
+
+module.exports = func;
+
+},{}],12:[function(require,module,exports){
+arguments[4][7][0].apply(exports,arguments)
+},{"dup":7}],13:[function(require,module,exports){
+var getPairs = require('amp-pairs');
+
+
+module.exports = function matches(attrs) {
+    var pairs = getPairs(attrs);
+    var length = pairs.length;
+    return function(obj) {
+        if (obj == null) return !length;
+        obj = new Object(obj);
+        for (var i = 0; i < length; i++) {
+            var pair = pairs[i], key = pair[0];
+            if (pair[1] !== obj[key] || !(key in obj)) return false;
+        }
+        return true;
+    };
+};
+
+},{"amp-pairs":14}],14:[function(require,module,exports){
+var objKeys = require('amp-keys');
+
+
+module.exports = function pairs(obj) {
+    var keys = objKeys(obj);
+    var length = keys.length;
+    var result = Array(length);
+    for (var i = 0; i < length; i++) {
+        result[i] = [keys[i], obj[keys[i]]];
+    }
+    return result;
+};
+
+},{"amp-keys":16}],15:[function(require,module,exports){
+module.exports = function property(key) {
+    return function(obj) {
+        return obj == null ? void 0 : obj[key];
+    };
+};
+
+},{}],16:[function(require,module,exports){
+arguments[4][3][0].apply(exports,arguments)
+},{"amp-has":17,"amp-index-of":18,"amp-is-object":20,"dup":3}],17:[function(require,module,exports){
+arguments[4][4][0].apply(exports,arguments)
+},{"dup":4}],18:[function(require,module,exports){
+arguments[4][5][0].apply(exports,arguments)
+},{"amp-is-number":19,"dup":5}],19:[function(require,module,exports){
+arguments[4][6][0].apply(exports,arguments)
+},{"dup":6}],20:[function(require,module,exports){
+arguments[4][7][0].apply(exports,arguments)
+},{"dup":7}],21:[function(require,module,exports){
 var Model = require('tongs.model');
+var util = require('tongs.util');
 
 function modelify(cookie) {
   var cookie_key_vals = cookie.split(/=(.+)/);
@@ -17,7 +235,7 @@ var TongsCollection = function(cookie) {
  */
 TongsCollection.prototype.toModels = function(cookie) {
   if (Object.prototype.toString.call(cookie) === '[object String]') {
-    return cookie.split('; ').map(function(cookie) {
+    return util.map(cookie.split('; '), function(cookie) {
       return modelify(cookie);
     });
   }
@@ -46,7 +264,7 @@ TongsCollection.prototype.get = function(name) {
  * @param {function} callback
  */
 TongsCollection.prototype.each = function(callback, thisArg) {
-  this._models.forEach(function(model) {
+  util.each(this._models, function(model) {
     thisArg = thisArg || this;
     callback.call(thisArg, model);
   });
@@ -56,7 +274,7 @@ TongsCollection.prototype.each = function(callback, thisArg) {
  * @return {array<object>}
  */
 TongsCollection.prototype.toJSON = function() {
-  return this._models.map(function(model) {
+  return util.map(this._models, function(model) {
     var json = {};
     json.name = model.name();
     json.value = model.value();
@@ -73,7 +291,7 @@ TongsCollection.prototype.removeAll = function() {
 
 module.exports = TongsCollection;
 
-},{"tongs.model":3}],2:[function(require,module,exports){
+},{"tongs.model":23,"tongs.util":24}],22:[function(require,module,exports){
 (function (global){
 'use strict';
 
@@ -194,81 +412,10 @@ global.tongs = function() {
 };
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"tongs.collection":1,"tongs.model":3}],3:[function(require,module,exports){
+},{"tongs.collection":21,"tongs.model":23}],23:[function(require,module,exports){
 'use strict';
 
-var opt = {
-  /**
-   * @param {string || date} date
-   */
-  'expires': function(date) {
-    var date_str = "";
-
-    switch(Object.prototype.toString.call(date)) {
-      case "[object Date]":
-        date_str = date.toUTCString();
-      break;
-
-      case "[object String]":
-        date_str = date;
-      break;
-
-      default:
-        date_str = "";
-    }
-
-    return concatKeyVal('expires', date_str);
-  },
-
-  'path': function(path) {
-    return concatKeyVal('path', path);
-  },
-
-  'domain': function(domain) {
-    return concatKeyVal('domain', domain);
-  },
-
-  'secure': function(secure) {
-    return secure;
-  }
-};
-
-/**
- * copy node-util extend
- */
-function extend(origin, add) {
-  var keys = Object.keys(add);
-  var i = keys.length;
-  while (i--) {
-    origin[keys[i]] = add[keys[i]];
-  }
-  return origin;
-}
-
-/**
- * @param {string} key
- * @param {string} value
- */
-function concatKeyVal(key, value) {
-  return key + '=' + value;
-}
-
-/**
- * @param {object} obj
- * @return {object}
- */
-function constructOptionObject(obj) {
-  var _obj = {};
-
-  Object.keys(obj).forEach(function(key) {
-    if (!(key in opt)) return;
-    _obj[key] = opt[key](obj[key]);
-  });
-
-  return _obj;
-}
-
-/******************** main ********************/
+var util = require('tongs.util');
 
 /**
  *  @constructor
@@ -282,7 +429,7 @@ var TongsModel = function(name, value, option) {
   this.attrs = [];
   this.option = option || {};
 
-  this.attrs.push(concatKeyVal(this._name, this._value));
+  this.attrs.push(util.concatKeyVal(this._name, this._value));
   this.updateOptions(this.option);
 };
 
@@ -300,7 +447,7 @@ TongsModel.prototype.value = function(new_value) {
   if (!new_value) return decodeURIComponent(this._value);
 
   this._value = new_value;
-  this.attrs[0] = concatKeyVal(this._name, this._value);
+  this.attrs[0] = util.concatKeyVal(this._name, this._value);
 
   return this._value;
 };
@@ -310,13 +457,13 @@ TongsModel.prototype.value = function(new_value) {
  * @return {this}
  */
 TongsModel.prototype.updateOptions = function(option) {
-  this.option = extend(this.option, constructOptionObject(option));
-  this.attrs.length = 1;
+  this.option = util.extend(this.option, util.constructOptionObject(option));
   
-  var options = Object.keys(this.option).map(function(key) {
-    return this.option[key];
-  }, this);
+  var options = util.map(this.option, function optionMap(value, key) {
+    return value;
+  });
 
+  this.attrs.length = 1;
   this.attrs = this.attrs.concat(options);
 
   return this;
@@ -344,10 +491,90 @@ TongsModel.prototype.save = function() {
  */
 TongsModel.prototype.remove = function(option) {
   option = option || {};
-  this.updateOptions(extend(option, {expires: new Date(1970, 1, 1)}));
+  this.updateOptions(util.extend(option, {expires: new Date(1970, 1, 1)}));
   this.save();
 };
 
 module.exports = TongsModel;
 
-},{}]},{},[2]);
+},{"tongs.util":24}],24:[function(require,module,exports){
+var util = {
+  opt: {
+    /**
+     * @param {string || date} date
+     */
+    'expires': function(date) {
+      var date_str = "";
+
+      switch(Object.prototype.toString.call(date)) {
+        case "[object Date]":
+          date_str = date.toUTCString();
+        break;
+
+        case "[object String]":
+          date_str = date;
+        break;
+
+        default:
+          date_str = "";
+      }
+
+      return util.concatKeyVal('expires', date_str);
+    },
+
+    'path': function(path) {
+      return util.concatKeyVal('path', path);
+    },
+
+    'domain': function(domain) {
+      return util.concatKeyVal('domain', domain);
+    },
+
+    'secure': function(secure) {
+      return secure;
+    }
+  },
+
+  /**
+   * @param {string} key
+   * @param {string} value
+   */
+  concatKeyVal: function concatKeyVal(key, value) {
+    return key + '=' + value;
+  },
+
+  /**
+   * copy node-util extend
+   */
+  extend: function extend(origin, add) {
+    var keys = Object.keys(add);
+    var i = keys.length;
+    while (i--) {
+      origin[keys[i]] = add[keys[i]];
+    }
+    return origin;
+  },
+
+  /**
+   * @param {object} obj
+   * @return {object}
+   */
+  constructOptionObject: function constructOptionObject(obj) {
+    var _obj = {};
+
+    Object.keys(obj).forEach(function(key) {
+      if (!(key in util.opt)) return;
+      _obj[key] = util.opt[key](obj[key]);
+    });
+
+    return _obj;
+  },
+
+  each: require('amp-each'),
+  map: require('amp-map')
+
+};
+
+module.exports = util;
+
+},{"amp-each":1,"amp-map":8}]},{},[22]);
