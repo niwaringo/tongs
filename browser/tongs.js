@@ -216,6 +216,43 @@ arguments[4][6][0].apply(exports,arguments)
 },{"dup":6}],20:[function(require,module,exports){
 arguments[4][7][0].apply(exports,arguments)
 },{"dup":7}],21:[function(require,module,exports){
+arguments[4][2][0].apply(exports,arguments)
+},{"dup":2}],22:[function(require,module,exports){
+arguments[4][3][0].apply(exports,arguments)
+},{"amp-has":23,"amp-index-of":24,"amp-is-object":26,"dup":3}],23:[function(require,module,exports){
+arguments[4][4][0].apply(exports,arguments)
+},{"dup":4}],24:[function(require,module,exports){
+arguments[4][5][0].apply(exports,arguments)
+},{"amp-is-number":25,"dup":5}],25:[function(require,module,exports){
+arguments[4][6][0].apply(exports,arguments)
+},{"dup":6}],26:[function(require,module,exports){
+arguments[4][7][0].apply(exports,arguments)
+},{"dup":7}],27:[function(require,module,exports){
+var createCallback = require('amp-create-callback');
+var objKeys = require('amp-keys');
+
+
+module.exports = function reduce(obj, iteratee, memo, context) {
+    if (obj == null) obj = [];
+    iteratee = createCallback(iteratee, context, 4);
+    var keys = obj.length !== +obj.length && objKeys(obj);
+    var length = (keys || obj).length;
+    var index = 0;
+    var currentKey;
+    if (arguments.length < 3) {
+        if (!length) {
+            throw new TypeError('Reduce of empty array with no initial value');
+        }
+        memo = obj[keys ? keys[index++] : index++];
+    }
+    for (; index < length; index++) {
+        currentKey = keys ? keys[index] : index;
+        memo = iteratee(memo, obj[currentKey], currentKey, obj);
+    }
+    return memo;
+};
+
+},{"amp-create-callback":21,"amp-keys":22}],28:[function(require,module,exports){
 var Model = require('tongs.model');
 var util = require('tongs.util');
 
@@ -291,7 +328,7 @@ TongsCollection.prototype.removeAll = function() {
 
 module.exports = TongsCollection;
 
-},{"tongs.model":23,"tongs.util":24}],22:[function(require,module,exports){
+},{"tongs.model":30,"tongs.util":31}],29:[function(require,module,exports){
 (function (global){
 'use strict';
 
@@ -412,7 +449,7 @@ global.tongs = function() {
 };
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"tongs.collection":21,"tongs.model":23}],23:[function(require,module,exports){
+},{"tongs.collection":28,"tongs.model":30}],30:[function(require,module,exports){
 'use strict';
 
 var util = require('tongs.util');
@@ -449,7 +486,7 @@ TongsModel.prototype.value = function(new_value) {
   this._value = new_value;
   this.attrs[0] = util.concatKeyVal(this._name, this._value);
 
-  return this._value;
+  return decodeURIComponent(this._value);
 };
 
 /**
@@ -497,7 +534,7 @@ TongsModel.prototype.remove = function(option) {
 
 module.exports = TongsModel;
 
-},{"tongs.util":24}],24:[function(require,module,exports){
+},{"tongs.util":31}],31:[function(require,module,exports){
 var util = {
   opt: {
     /**
@@ -560,21 +597,18 @@ var util = {
    * @return {object}
    */
   constructOptionObject: function constructOptionObject(obj) {
-    var _obj = {};
-
-    Object.keys(obj).forEach(function(key) {
+    return util.reduce(obj, function(_obj, value, key) {
       if (!(key in util.opt)) return;
       _obj[key] = util.opt[key](obj[key]);
-    });
-
-    return _obj;
+      return _obj;
+    }, {});
   },
 
   each: require('amp-each'),
-  map: require('amp-map')
-
+  map: require('amp-map'),
+  reduce: require('amp-reduce')
 };
 
 module.exports = util;
 
-},{"amp-each":1,"amp-map":8}]},{},[22]);
+},{"amp-each":1,"amp-map":8,"amp-reduce":27}]},{},[29]);
