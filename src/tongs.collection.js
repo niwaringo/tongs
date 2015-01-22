@@ -1,4 +1,5 @@
 var Model = require('tongs.model');
+var util = require('tongs.util');
 
 function modelify(cookie) {
   var cookie_key_vals = cookie.split(/=(.+)/);
@@ -16,7 +17,7 @@ var TongsCollection = function(cookie) {
  */
 TongsCollection.prototype.toModels = function(cookie) {
   if (Object.prototype.toString.call(cookie) === '[object String]') {
-    return cookie.split('; ').map(function(cookie) {
+    return util.map(cookie.split('; '), function(cookie) {
       return modelify(cookie);
     });
   }
@@ -45,7 +46,7 @@ TongsCollection.prototype.get = function(name) {
  * @param {function} callback
  */
 TongsCollection.prototype.each = function(callback, thisArg) {
-  this._models.forEach(function(model) {
+  util.each(this._models, function(model) {
     thisArg = thisArg || this;
     callback.call(thisArg, model);
   });
@@ -55,7 +56,7 @@ TongsCollection.prototype.each = function(callback, thisArg) {
  * @return {array<object>}
  */
 TongsCollection.prototype.toJSON = function() {
-  return this._models.map(function(model) {
+  return util.map(this._models, function(model) {
     var json = {};
     json.name = model.name();
     json.value = model.value();
