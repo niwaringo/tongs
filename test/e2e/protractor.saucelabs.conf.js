@@ -14,12 +14,6 @@ exports.config = {
     'platform': 'Windows 7'
   },
   {
-    'name': 'win7-ie9',
-    'browserName': 'internet explorer',
-    'version': '9',
-    'platform': 'Windows 7'
-  },
-  {
     'name': 'win7-ie10',
     'browserName': 'internet explorer',
     'version': '10',
