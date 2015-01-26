@@ -44,30 +44,17 @@ var util = {
   },
 
   /**
-   * copy node-util extend
-   */
-  extend: function extend(origin, add) {
-    var keys = util.keys(add);
-    var i = keys.length;
-    while (i--) {
-      origin[keys[i]] = add[keys[i]];
-    }
-    return origin;
-  },
-
-  /**
    * @param {object} obj
    * @return {object}
    */
   constructOptionObject: function constructOptionObject(obj) {
-    return util.reduce(obj, function(_obj, value, key) {
+    return util.reduce(obj, function(options, value, key) {
       if (!(key in util.opt)) return;
-      _obj[key] = util.opt[key](obj[key]);
-      return _obj;
-    }, {});
+      options.push(util.opt[key](obj[key]));
+      return options;
+    }, []);
   },
 
-  keys: require('amp-keys'),
   each: require('amp-each'),
   map: require('amp-map'),
   reduce: require('amp-reduce')
