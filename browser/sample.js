@@ -1,5 +1,5 @@
 function setCookie(name, value, option) {
-  tongs().cookie(name, value, option);
+  tongs.cookie(name, value, option);
 }
 
 function setCookieWithOption(name, value) {
