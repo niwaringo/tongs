@@ -9,7 +9,7 @@ Tongs.prototype.cookie = function(name, value, option) {
 };
 
 Tongs.prototype.save = function(name, value, option) {
-  document.cookie = [name, '=', value].join('');
+  document.cookie = [name, '=', encodeURIComponent(value)].join('');
 };
 
 Tongs.prototype.read = function(name) {
@@ -18,7 +18,7 @@ Tongs.prototype.read = function(name) {
 
   for (var i = 0, l = cookie_stores.length; i < l; i++) {
     cookies = cookie_stores[i].split(/=(.+)/);
-    if (cookies[0] === name) return cookies[1];
+    if (cookies[0] === name) return decodeURIComponent(cookies[1]);
   }
 };
 

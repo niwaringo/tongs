@@ -27,6 +27,12 @@ describe('Tongs', function() {
     assert.strictEqual(this.tongs.read('name'), 'value');
   });
 
+  it('encode:decode', function() {
+    this.tongs.save('name', '値');
+    assert.strictEqual(document.cookie, 'name=%E5%80%A4');
+    assert.strictEqual(this.tongs.read('name'), '値');
+  });
+
   it('cookie method(read)', function() {
     this.tongs.save('cookie_name', 'value');
     assert.strictEqual(this.tongs.cookie('cookie_name'), 'value');
