@@ -45,7 +45,8 @@ describe('tongs top page', function() {
   });
 
   it('set other option', function() {
-    element(by.id('expires-number')).sendKeys(1);
+    element(by.id('path')).sendKeys('/');
+    element(by.id('path')).sendKeys('/');
   });
 
 });
