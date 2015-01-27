@@ -1,8 +1,4 @@
 exports.config = {
-  // capabilities: {
-  //   'browserName': 'chrome'
-  // },
-  //
   multiCapabilities: [{
     'nama': 'win7-chrome',
     'browserName': 'chrome',
@@ -11,6 +7,22 @@ exports.config = {
   {
     'name': 'win7-firefox',
     'browserName': 'firefox',
+    'platform': 'Windows 7'
+  },
+  {
+    'name': 'safari',
+    'browserName': 'safari'
+  },
+  {
+    'name': 'win7-ie8',
+    'browserName': 'internet explorer',
+    'version': '8',
+    'platform': 'Windows 7'
+  },
+  {
+    'name': 'win7-ie9',
+    'browserName': 'internet explorer',
+    'version': '9',
     'platform': 'Windows 7'
   },
   {
@@ -25,6 +37,18 @@ exports.config = {
     'version': '11',
     'platform': 'Windows 7'
   },
+  {
+    'name': 'android-4.4',
+    'browserName': 'android',
+    'version': '4.4',
+    'platform': 'Linux'
+  },
+  {
+    'name': 'iphone-8.1',
+    'browserName': 'iphone',
+    'version': '8.1',
+    'platform': 'OS X 10.10'
+  }
   ],
   baseUrl: 'http://niwaringo.github.io/tongs/browser',
   sauceUser: 'niwaringo_tongs',

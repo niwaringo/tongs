@@ -13,8 +13,20 @@
 <button type="button" onclick="eachCookie([['name1', 'value1'],['name2', 'value2']])" id="each">Each name:new_name, value:new_value</button>
 
 <div id="display" style="border:1px dotted #999; padding:8px; width:200px; margin-top:30px;"></div>
-<input type="text" id="date">
-<button type="button" onclick="setCookieWithOption('name', 'value')" id="set-with-option">Set name:name, value:value optin</button>
+<div>
+path:<input type="text" id="path">
+</div>
+<div>
+domain:<input type="text" id="domain">
+</div>
+<div>
+expires-date:<input type="text" id="expires-date">
+</div>
+<div>
+expires-number:<input type="text" id="expires-number">
+</div>
+<button type="button" onclick="setCookieWithExpiresDate('name', 'value')" id="set-with-option-expires-date">Set name:name, value:value expires-date:</button>
+<button type="button" onclick="setCookieWithExpiresNumber('name', 'value')" id="set-with-option-expires-number">Set name:name, value:value expires-number</button>
 
 
 <script src="./tongs.js"></script>

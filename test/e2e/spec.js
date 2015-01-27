@@ -1,8 +1,8 @@
 // spec.js
 describe('tongs top page', function() {
   browser.ignoreSynchronization = true;
+  console.log(browser.baseUrl);
   beforeEach(function() {
-    console.log(browser.baseUrl);
     browser.get(browser.baseUrl);
     browser.manage().deleteAllCookies();
   });
@@ -14,6 +14,36 @@ describe('tongs top page', function() {
       expect(cookie.name).toEqual('name');
     });
   });
+
+  it('set expires with date', function() {
+    var tom_str = new Date(new Date().getTime() + 24 * 60 * 60 * 1000).toString();
+    element(by.id('expires-date')).sendKeys(tom_str);
+    element(by.id('set-with-option-expires-date')).click();
+
+    browser.manage().getCookie('name').then(function(cookie) {
+      var _expiry = Math.floor(new Date(tom_str).getTime() / 1000);
+      expect(_expiry).toEqual(cookie.expiry);
+    });
+  });
+
+  it('set expires with number', function() {
+    var tom = {};
+    tom._date = new Date(new Date().getTime() + 24 * 60 * 60 * 1000);
+    tom.year = tom._date.getFullYear();
+    tom.month = tom._date.getMonth();
+    tom.date = tom._date.getDate();
+
+    element(by.id('expires-number')).sendKeys(1);
+    element(by.id('set-with-option-expires-number')).click();
+
+    browser.manage().getCookie('name').then(function(cookie) {
+      var _expiry = new Date(cookie.expiry * 1000);
+      expect(_expiry.getFullYear()).toEqual(tom.year);
+      expect(_expiry.getMonth()).toEqual(tom.month);
+      expect(_expiry.getDate()).toEqual(tom.date);
+    });
+  });
+
 });
 //
 //   it('set with option', function() {
