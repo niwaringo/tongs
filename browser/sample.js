@@ -12,6 +12,10 @@ function setCookieWithExpiresNumber(name, value) {
   tongs.cookie(name, value, {expires:date});
 }
 
+function setCookieWithOtherOption(name, value) {
+  tongs.cookie(name, value, optionBuild());
+}
+
 function optionBuild() {
   var options = ['path', 'domain'];
   var elem, obj = {};
