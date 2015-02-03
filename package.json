@@ -1,6 +1,6 @@
 {
   "name": "tongs",
-  "version": "0.5.2",
+  "version": "0.6.0",
   "description": "cookie utility",
   "main": "./src/tongs.js",
   "scripts": {
@@ -11,10 +11,7 @@
     "wdstart": "./node_modules/protractor/bin/webdriver-manager start"
   },
   "browser": {
-    "tongs": "./src/tongs.js",
-    "tongs.model": "./src/tongs.model.js",
-    "tongs.collection": "./src/tongs.collection.js",
-    "tongs.util": "./src/tongs.util.js"
+    "tongs": "./src/tongs.js"
   },
   "keywords": [
     "cookie",
@@ -36,11 +33,5 @@
     "mocha": "^2.1.0",
     "node-static": "^0.7.6",
     "protractor": "^1.6.1"
-  },
-  "dependencies": {
-    "amp-each": "^1.0.1",
-    "amp-keys": "^1.0.1",
-    "amp-map": "^1.0.1",
-    "amp-reduce": "^1.0.0"
   }
 }
