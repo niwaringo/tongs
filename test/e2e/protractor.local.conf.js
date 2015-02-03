@@ -1,10 +1,9 @@
 exports.config = {
-  // seleniumServerJar: '../../node_modules/protractor/selenium/selenium-server-standalone-2.44.0.jar',
-  // seleniumAddress: 'http://localhost:4444/wd/hub',
-  baseUrl: 'http://niwaringo.github.io/tongs/browser',
-  // baseUrl: 'http://localhost:8080/',
+  baseUrl: 'https://dl.dropboxusercontent.com/u/14041548/index.html',
   seleniumArgs: ['-browserTimeout=60'],
-  'browserName': 'chrome',
+  capabilities: {
+    'browserName': 'chrome'
+  },
   allScriptsTimeout: 30000,
   specs: ['spec.js']
 };

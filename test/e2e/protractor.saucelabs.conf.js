@@ -50,7 +50,7 @@ exports.config = {
     'platform': 'OS X 10.10'
   }
   ],
-  baseUrl: 'http://niwaringo.github.io/tongs/browser',
+  baseUrl: 'https://dl.dropboxusercontent.com/u/14041548/index.html',
   sauceUser: 'niwaringo_tongs',
   // sauceKey: process.env.SAUCE_ACCESS_KEY,
   sauceKey: 'ba87052e-732e-41bd-b501-576f62aa7ba2',
