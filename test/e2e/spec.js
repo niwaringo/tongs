@@ -1,7 +1,7 @@
 // spec.js
 var optionExec = function(callback) {
   browser.getCapabilities().then(function(s) { 
-    if (s.caps_.browserName.match(/chrome/)) {
+    if (s.caps_.browserName.match(/chrome|firefox/)) {
       callback();
     }
   });
