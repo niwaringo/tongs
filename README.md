@@ -17,7 +17,7 @@ Install
 
 ### browser
 
-[Download here](https://raw.githubusercontent.com/niwaringo/tongs/master/dist/tongs.js)
+[Download here](https://raw.githubusercontent.com/niwaringo/tongs/master/browser/tongs.js)
 
 ```html
 <script src="/path/to/tongs.js"></script>
