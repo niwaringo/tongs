@@ -138,7 +138,7 @@ exports.config = {
     'public': 'public'
   },
 
-  //iOS
+  // iOS
   {
     'name': 'iphone-8.1',
     'browserName': 'iphone',
