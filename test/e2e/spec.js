@@ -48,18 +48,18 @@ describe('tongs top page', function() {
 
   //chrome and firefox only
   optionExec(function() {
+    // set cookie and get Date
     it('expires(date)', function() {
-      browser.executeScript(function() {
+      var date = browser.executeScript(function() {
         var tom = new Date();
         tom.setDate(tom.getDate() + 1);
         tongs.cookie('name', 'value', {expires: tom});
+
+        return Math.floor(+tom / 1000);
       });
 
       browser.manage().getCookie('name').then(function(cookie) {
-        var tom = new Date(new Date().getTime() + 24 * 60 * 60 * 1000);
-        var _expiry = Math.floor(tom.getTime() / 100000);
-
-        expect(_expiry).toEqual(Math.floor(cookie.expiry / 100));
+        expect(date).toEqual(Math.floor(cookie.expiry));
       });
     });
 
