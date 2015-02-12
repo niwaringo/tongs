@@ -46,6 +46,17 @@ describe('tongs top page', function() {
     });
   });
 
+  it('read all available cookie', function() {
+    var cookies = browser.executeScript(function() {
+      tongs.cookie('name1', 'value1');
+      tongs.cookie('name2', 'value2');
+      return tongs.cookie();
+    });
+
+    expect(cookies).toEqual([{name1: 'value1'}, {name2: 'value2'}]);
+  });
+
+
   //chrome and firefox only
   optionExec(function() {
     // set cookie and get Date

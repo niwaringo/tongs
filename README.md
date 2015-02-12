@@ -53,7 +53,15 @@ tongs.cookie('name', 'value', {expires: 7, path: '/'});
 
 ```javascript
 tongs.cookie('name'); // => value
-tongs.cookie('nothing'); // => ''
+tongs.cookie('nothing'); // => undefined
+```
+
+### Get all available cookies:
+
+```javascript
+// document.cookie => name1=value1, name2=value2
+tongs.cookie();
+// => [{name1: value1}, {name2: value2}]
 ```
 
 ### Remove Cookie:

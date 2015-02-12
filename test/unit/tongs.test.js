@@ -27,6 +27,11 @@ describe('Tongs', function() {
     assert.strictEqual(this.tongs.read('name'), 'value');
   });
 
+  it('read nothing', function() {
+    this.tongs.save('name', 'value');
+    assert.strictEqual(this.tongs.read('nothing'), undefined);
+  });
+
   it('encode:decode', function() {
     this.tongs.save('name', '値');
     assert.strictEqual(document.cookie, 'name=%E5%80%A4');
@@ -37,6 +42,14 @@ describe('Tongs', function() {
     this.tongs.save('cookie_name', 'value');
     assert.strictEqual(this.tongs.cookie('cookie_name'), 'value');
   });
+
+  it('cookie read(all cookies)', function() {
+    this.tongs.save('name1', 'value1');
+    this.tongs.save('name2', 'value2');
+
+    assert.strictEqual(this.tongs.cookie()[1].name2, "value2");
+  });
+
 
   it('cookie method(save)', function() {
     this.tongs.cookie('cookie_name', 'value');

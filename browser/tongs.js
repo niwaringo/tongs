@@ -9,7 +9,11 @@ module.exports = new Tongs();
 function Tongs(cookies) {}
 
 Tongs.prototype.cookie = function(name, value, option) {
-  if (!value) return this.read(name);
+  if (arguments.length > 0 && !value) return this.read(name);
+
+  if (arguments.length === 0) {
+    return this.readAll();
+  }
 
   this.save(name, value, option);
 };
@@ -18,14 +22,36 @@ Tongs.prototype.save = function(name, value, option) {
   document.cookie = cookieStringfy(name, encodeURIComponent(value), option);
 };
 
-Tongs.prototype.read = function(name) {
+Tongs.prototype.each = function(callback) {
   var cookie_stores = document.cookie.split('; ');
   var cookies = [];
 
   for (var i = 0, l = cookie_stores.length; i < l; i++) {
     cookies = reStructreCookie(cookie_stores[i]);
-    if (cookies[0] === name) return decodeURIComponent(cookies[1]);
+    callback.call(this, cookies);
   }
+};
+
+Tongs.prototype.read = function(name) {
+  var value;
+  this.each(function(cookie) {
+    if (cookie[0] === name) {
+      value = decodeURIComponent(cookie[1]);
+    }
+  });
+  return value;
+};
+
+Tongs.prototype.readAll = function() {
+  var cookies = [];
+
+  this.each(function(cookie) {
+    var obj = {};
+    obj[cookie[0]] = cookie[1];
+    cookies.push(obj);
+  });
+
+  return cookies;
 };
 
 Tongs.prototype.remove = function(name, option) {

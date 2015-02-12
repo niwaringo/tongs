@@ -1,4 +1,6 @@
-var build = 'v0.6.0';
+var build = 'v0.6.2 - 1';
+var chrome_version = '39';
+var firefox_version = '35';
 
 exports.config = {
   multiCapabilities: [{
@@ -6,6 +8,7 @@ exports.config = {
     'nama': 'win7-chrome',
     'browserName': 'chrome',
     'platform': 'Windows 7',
+    'version': chrome_version,
     'build': build,
     'passed': true,
     'public': 'public'
@@ -14,6 +17,7 @@ exports.config = {
     'nama': 'mac-chrome',
     'browserName': 'chrome',
     'platform': 'OS X 10.10',
+    'version': chrome_version,
     'build': build,
     'passed': true,
     'public': 'public'
@@ -22,6 +26,7 @@ exports.config = {
     'nama': 'linux-chrome',
     'browserName': 'chrome',
     'platform': 'Linux',
+    'version': chrome_version,
     'build': build,
     'passed': true,
     'public': 'public'
@@ -32,6 +37,7 @@ exports.config = {
     'name': 'win7-firefox',
     'browserName': 'firefox',
     'platform': 'Windows 7',
+    'version': firefox_version,
     'build': build,
     'passed': true,
     'public': 'public'
@@ -40,6 +46,7 @@ exports.config = {
     'name': 'mac-firefox',
     'browserName': 'firefox',
     'platform': 'OS X 10.10',
+    'version': firefox_version,
     'build': build,
     'passed': true,
     'public': 'public'
@@ -48,6 +55,7 @@ exports.config = {
     'name': 'linux-firefox',
     'browserName': 'firefox',
     'platform': 'Linux',
+    'version': firefox_version,
     'build': build,
     'passed': true,
     'public': 'public'

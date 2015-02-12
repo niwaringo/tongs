@@ -3,7 +3,11 @@
 function Tongs(cookies) {}
 
 Tongs.prototype.cookie = function(name, value, option) {
-  if (!value) return this.read(name);
+  if (arguments.length > 0 && !value) return this.read(name);
+
+  if (arguments.length === 0) {
+    return this.readAll();
+  }
 
   this.save(name, value, option);
 };
@@ -29,8 +33,19 @@ Tongs.prototype.read = function(name) {
       value = decodeURIComponent(cookie[1]);
     }
   });
-
   return value;
+};
+
+Tongs.prototype.readAll = function() {
+  var cookies = [];
+
+  this.each(function(cookie) {
+    var obj = {};
+    obj[cookie[0]] = cookie[1];
+    cookies.push(obj);
+  });
+
+  return cookies;
 };
 
 Tongs.prototype.remove = function(name, option) {

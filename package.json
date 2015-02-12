@@ -1,7 +1,7 @@
 {
   "name": "tongs",
-  "version": "0.6.1",
-  "description": "cookie utility. don't dependency jquery. motivation => jquery-cookie is awsome!! but jquery ....",
+  "version": "0.6.2",
+  "description": "cookie utility. don't dependency jquery.",
   "main": "./src/tongs.js",
   "scripts": {
     "test": "./node_modules/karma/bin/karma start",
