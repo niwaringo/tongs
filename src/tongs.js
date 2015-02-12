@@ -12,14 +12,25 @@ Tongs.prototype.save = function(name, value, option) {
   document.cookie = cookieStringfy(name, encodeURIComponent(value), option);
 };
 
-Tongs.prototype.read = function(name) {
+Tongs.prototype.each = function(callback) {
   var cookie_stores = document.cookie.split('; ');
   var cookies = [];
 
   for (var i = 0, l = cookie_stores.length; i < l; i++) {
     cookies = reStructreCookie(cookie_stores[i]);
-    if (cookies[0] === name) return decodeURIComponent(cookies[1]);
+    callback.call(this, cookies);
   }
+};
+
+Tongs.prototype.read = function(name) {
+  var value;
+  this.each(function(cookie) {
+    if (cookie[0] === name) {
+      value = decodeURIComponent(cookie[1]);
+    }
+  });
+
+  return value;
 };
 
 Tongs.prototype.remove = function(name, option) {
