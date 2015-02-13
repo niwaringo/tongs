@@ -5,9 +5,7 @@ function Tongs(cookies) {}
 Tongs.prototype.cookie = function(name, value, option) {
   if (arguments.length > 0 && !value) return this.read(name);
 
-  if (arguments.length === 0) {
-    return this.readAll();
-  }
+  if (arguments.length === 0) return this.readAll();
 
   this.save(name, value, option);
 };
