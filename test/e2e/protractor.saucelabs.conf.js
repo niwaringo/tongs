@@ -1,4 +1,4 @@
-var build = 'v0.6.2 - 1';
+var build = 'v0.6.3 - 0';
 var chrome_version = '39';
 var firefox_version = '35';
 

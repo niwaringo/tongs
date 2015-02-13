@@ -55,6 +55,24 @@ Tongs.prototype.remove = function(name, option) {
   return !this.read(name);
 };
 
+Tongs.prototype.wideDomain = function() {
+  var parts = location.hostname.split('.').reverse();
+  var wide_domain = parts.shift();
+  var c = '__tongs_test__';
+
+  for (var i = 0, l = parts.length; i < l; i++) {
+    wide_domain = parts[i] + '.' + wide_domain;
+
+    if (i === (l - 1)) return wide_domain;
+
+    this.save(c, c);
+    if (this.read(c)) {
+      this.remove(c);
+      return '.' + wide_domain;
+    }
+  }
+};
+
 module.exports = Tongs;
 
 function reStructreCookie(cookie_str) {

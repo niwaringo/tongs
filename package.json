@@ -1,6 +1,6 @@
 {
   "name": "tongs",
-  "version": "0.6.2",
+  "version": "0.6.3",
   "description": "cookie utility. don't dependency jquery.",
   "main": "./src/tongs.js",
   "scripts": {

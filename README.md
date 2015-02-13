@@ -75,3 +75,17 @@ tongs.cookie('path_cookie', 'value', {path: '/'});
 tongs.remove('path_cookie'); // => false
 tongs.remove('path_cookie', {path: '/'}); // => true
 ```
+
+### Get wide domain
+
+```javascript
+// location.hostname => dl.dropboxusercontent.com
+tongs.wideDomain(); // => .dropboxusercontent.com
+```
+
+ex) use cookie across the subdomain
+
+```javascript
+var set_domain = tongs.wideDomain();
+tongs.cookie('name', 'valkue', {domain: set_domain});
+```

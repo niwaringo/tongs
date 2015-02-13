@@ -56,6 +56,14 @@ describe('tongs top page', function() {
     expect(cookies).toEqual([{name1: 'value1'}, {name2: 'value2'}]);
   });
 
+  it('wide domain', function() {
+    var cookies = browser.executeScript(function() {
+      return tongs.wideDomain();
+    });
+
+    expect(cookies).toEqual('.dropboxusercontent.com');
+  });
+
 
   //chrome and firefox only
   optionExec(function() {
