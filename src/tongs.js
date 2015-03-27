@@ -107,4 +107,6 @@ Tongs.prototype.wideDomain = function() {
   }
 };
 
-module.exports = Tongs;
+module.exports = function() {
+  return new Tongs();
+};
