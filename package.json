@@ -1,14 +1,13 @@
 {
   "name": "tongs",
-  "version": "0.6.3",
+  "version": "0.7.0",
   "description": "cookie utility. don't dependency jquery.",
   "main": "./src/tongs.js",
   "scripts": {
     "test": "./node_modules/karma/bin/karma start",
-    "build": "./node_modules/browserify/bin/cmd.js ./src/tongs.forbrowser.js -o ./browser/tongs.js -s tongs",
-    "server": "./node_modules/node-static/bin/cli.js ./",
+    "build": "./node_modules/browserify/bin/cmd.js . -o ./browser/tongs.js -s tongs",
     "e2elocal": "./node_modules/protractor/bin/protractor ./test/e2e/protractor.local.conf.js",
-    "wdstart": "./node_modules/protractor/bin/webdriver-manager start"
+    "e2eremote": "./node_modules/protractor/bin/protractor ./test/e2e/protractor.saucelabs.conf.js"
   },
   "browser": {
     "tongs": "./src/tongs.js"
