@@ -30,8 +30,7 @@ npm install tongs
 ```
 
 ```
-var Tongs = require('tongs');
-var tongs = new Tongs();
+var tongs = require('tongs');
 ```
 
 Usage
